@@ -1,0 +1,102 @@
+.login {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  #cover {
+      background-image: linear-gradient(to top, rgba(53, 51, 45, 0), rgb(51, 47, 47));
+      padding: 6rem;
+  }
+  .login_wrapper {
+    background-size: cover;
+    position: relative;
+    max-width: 100%;
+    height: 100vh;
+    background-attachment: fixed;
+  }
+  
+  .reg_wrapper {
+    background: #c9b68e;
+    background-size: cover;
+    position: relative;
+    max-width: 100%;
+    height: 100vh;
+    background-attachment: fixed;
+  }
+  
+  body {
+    background-color: rgb(239, 239, 239);
+  }
+  ::placeholder {
+    color: #6c757d;
+  }
+  .username,
+  .password,
+  .loginButton,
+  .name {
+    display: block;
+    margin-bottom: 15px;
+    padding: 20px;
+    width: 360px;
+    border: none;
+    background-color: #3b4148;
+    color: white;
+    font-size: x-large;
+    border-radius: 0.25rem;
+  }
+  
+  .loginButton {
+    width: 160px;
+    background-color: #f5c458;
+    color: black;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .loginButton:hover {
+    background-color: black;
+    color: #f5c458;
+  }
+  .loginButton:active {
+  }
+  
+  .username:hover,
+  .password:hover {
+    background-color: #434a52;
+  }
+  
+  .signup-option {
+    text-align: center;
+    padding: 5px;
+    color: #6c757d;
+    font-size: large;
+  }
+  
+  .signup-option a {
+    text-decoration: none;
+    color: #f5c458;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #565656;
+  }
+  
+  .logo img {
+    margin-left: 9px;
+    width: 30px;
+    height: 30px;
+  }
+  
+  #welcome_back {
+    margin-bottom: 50px;
+    color: #f5c458;
+  }
+  
+  .reg_title {
+    margin-bottom: 50px;
+    color: black;
+  }
