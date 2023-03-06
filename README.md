@@ -1,2 +1,3 @@
 # PayRanger
-Team Name: 
+Team Name: HyperTech Developers 
+
