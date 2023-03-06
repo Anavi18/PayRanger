@@ -54,16 +54,17 @@ export default function LogIn({ changeRoute, loadUser }) {
             onChange={onPasswordChange}
             className="password"
           />
+
           <div className = "row">
-          <button className="col-6 loginButton" >
-            Sign In
-          </button>
-          <button className="col-6 loginButton" >
+            <button className="col-6 loginButton" >
+              Sign In
+            </button>
+            <button className="col-6 regButton" >
+              
+                Register
             
-              Register
-           
-          </button>
-  
+            </button>
+    
           </div>
           
           <button className="loginButton" >

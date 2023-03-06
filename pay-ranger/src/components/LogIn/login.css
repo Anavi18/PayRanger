@@ -6,7 +6,6 @@
     transform: translate(-50%, -50%);
   }
   #cover {
-      background-image: linear-gradient(to top, rgba(53, 51, 45, 0), rgb(51, 47, 47));
       padding: 6rem;
   }
   .login_wrapper {
@@ -49,10 +48,19 @@
   
   .loginButton {
     width: 160px;
-    background-color: #f5c458;
+    background-color: #58f560;
     color: black;
     cursor: pointer;
-    display: block;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .regButton {
+    width: 160px;
+    background-color: #b658f5;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
     margin-left: auto;
     margin-right: auto;
   }
@@ -93,7 +101,7 @@
   
   #welcome_back {
     margin-bottom: 50px;
-    color: #f5c458;
+    color: #0c0903;
   }
   
   .reg_title {
