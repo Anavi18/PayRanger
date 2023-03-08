@@ -1,5 +1,12 @@
 .App {
   text-align: center;
+  background: url(duck_creek_office.jpeg);
+  background-size: cover;
+}
+
+.imgShadow {
+  background-color: #ffffffbb;
+  height: 100vh;
 }
 
 .App-logo {

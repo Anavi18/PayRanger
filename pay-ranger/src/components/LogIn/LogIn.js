@@ -42,32 +42,30 @@ export default function LogIn({ changeRoute, loadUser }) {
       <div className="login_wrapper">
         <div id = "cover" className="login">
           <h1 id="welcome_back">User Login</h1>
-          <div>
+          <div className="loginFlexbox">
+            <div>
             <input
-              type="text"
-              placeholder="Username"
-              onChange={onUsernameChange}
-              className="username"
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              onChange={onPasswordChange}
-              className="password"
-            />
-          <div>
-          </div>
-            <button className="col-6 loginButton" >
-              Sign In
-            </button>
-            <button className="col-6 regButton" >
-                Register
-            </button>
-    
-          </div>
-          
+                type="text"
+                placeholder="Username"
+                onChange={onUsernameChange}
+                className="username"
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={onPasswordChange}
+                className="password"
+              />
+            </div>
+            <div>
+              Ipsum et qui impedit officiis. Quaerat voluptas explicabo consequatur doloribus nostrum a. Voluptate fugiat dolore qui officiis minus. Voluptatem omnis quia laboriosam voluptates eveniet tenetur dolor numquam.
+            </div>
+            
+            
+             
+          </div>  
           <a href="#" className="forgotPassword">Forgot password?</a>
         </div>
       </div>

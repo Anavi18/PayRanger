@@ -6,8 +6,10 @@ import Header from './components/Header/Header.js';
 function App() {
   return ( 
   <div className="App">
-     <Header />
-     <Login />
+      <div className="imgShadow">
+        <Header />
+        <Login />
+      </div>
   </div>
   );
 }
