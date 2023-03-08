@@ -60,15 +60,13 @@ export default function LogIn({ changeRoute, loadUser }) {
               Sign In
             </button>
             <button className="col-6 regButton" >
-              
                 Register
-            
             </button>
     
           </div>
           
-          <button className="loginButton" >
-            Forgot Password
+          <button className="forgotPassword" >
+            Forgot Password?
           </button>
         </div>
       </div>
