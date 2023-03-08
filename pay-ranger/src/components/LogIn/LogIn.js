@@ -42,20 +42,23 @@ export default function LogIn({ changeRoute, loadUser }) {
       <div className="login_wrapper">
         <div id = "cover" className="login">
           <h1 id="welcome_back">User Login</h1>
-          <input
-            type="text"
-            placeholder="Username"
-            onChange={onUsernameChange}
-            className="username"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={onPasswordChange}
-            className="password"
-          />
-
-          <div className = "row">
+          <div>
+            <input
+              type="text"
+              placeholder="Username"
+              onChange={onUsernameChange}
+              className="username"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={onPasswordChange}
+              className="password"
+            />
+          <div>
+          </div>
             <button className="col-6 loginButton" >
               Sign In
             </button>
@@ -65,9 +68,7 @@ export default function LogIn({ changeRoute, loadUser }) {
     
           </div>
           
-          <button className="forgotPassword" >
-            Forgot Password?
-          </button>
+          <a href="#" className="forgotPassword">Forgot password?</a>
         </div>
       </div>
     );

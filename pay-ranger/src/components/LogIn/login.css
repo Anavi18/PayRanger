@@ -1,3 +1,12 @@
+.login_wrapper {
+  height: 90vh;
+  background-size: cover;
+  background-image: url(duck_creek_office.jpeg);
+}
+.login {
+  height: 90vh;
+  background-color: #ffffffbb;
+}
 /*.login {
     position: absolute;
     left: 50%;
