@@ -41,8 +41,8 @@ export default function LogIn({ changeRoute, loadUser }) {
     return (
       <div className="login_wrapper">
         <div id = "cover" className="login">
-          <h1 id="welcome_back">User Login</h1>
           <div className="loginFlexbox">
+          <h1 id="welcome_back">Welcome</h1>
             <div>
             <input
                 type="text"
@@ -59,14 +59,14 @@ export default function LogIn({ changeRoute, loadUser }) {
                 className="password"
               />
             </div>
-            <div>
-              Ipsum et qui impedit officiis. Quaerat voluptas explicabo consequatur doloribus nostrum a. Voluptate fugiat dolore qui officiis minus. Voluptatem omnis quia laboriosam voluptates eveniet tenetur dolor numquam.
+            <div className="buttonFlexbox">
+                <div><button className="loginButton">Login</button></div>
+                <div><button className="regButton">Register</button></div>
             </div>
-            
-            
-             
+            <div>
+               <a href="#" className="forgotPassword">Forgot password?</a>
+           </div>
           </div>  
-          <a href="#" className="forgotPassword">Forgot password?</a>
         </div>
       </div>
     );

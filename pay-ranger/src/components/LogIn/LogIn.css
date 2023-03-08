@@ -1,12 +1,67 @@
+
+.login_wrapper {
+  text-align: center;
+}
 .loginFlexbox {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: red;
+  background-color: white;
+  margin: auto; 
+  margin-top: 50px;
+  width: 450px;
 }
 .loginFlexbox > div {
-  background-color: blue;
+/*   background-color: green; */
   margin: 10px;
+}
+#welcome_back {
+  font-size: 48px;
+}
+.buttonFlexbox {
+  display: flex;
+  justify-content: center;
+  /* background-color: orange; */
+}
+.buttonFlexbox > div {
+  /* background-color: yellow; */
+  margin: 10px;
+}
+.username,
+.password,
+.loginButton,
+.regButton {
+  margin-bottom: 15px;
+  padding: 20px;
+  width: 360px;
+  border: none;
+  background-color: #3b4148;
+  color: white;
+  font-size: x-large;
+  font-family: inherit;
+  border-radius: 0.25rem;
+  transition: 300ms;
+}
+.username:hover,
+.password:hover {
+    background-color: #434a52;
+}
+.loginButton:hover, 
+.regButton:hover {
+  background-color: black;
+  color: #f5c458;
+}
+.loginButton {
+  width: 160px;
+  background-color: #2dd49c;
+  cursor: pointer;
+  display: inline-block;
+}
+.regButton {
+  width: 160px;
+  background-color: #3b298d;
+  cursor: pointer;
+  display: inline-block;
 }
 /*.login {
     position: absolute;
