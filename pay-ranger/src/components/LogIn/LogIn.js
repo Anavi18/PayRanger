@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import "./LogIn.css";
 
 
 
@@ -41,35 +41,32 @@ export default function LogIn({ changeRoute, loadUser }) {
     return (
       <div className="login_wrapper">
         <div id = "cover" className="login">
-          <h1 id="welcome_back">User Login</h1>
-          <input
-            type="text"
-            placeholder="Username"
-            onChange={onUsernameChange}
-            className="username"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={onPasswordChange}
-            className="password"
-          />
-
-          <div className = "row">
-            <button className="col-6 loginButton" >
-              Sign In
-            </button>
-            <button className="col-6 regButton" >
-              
-                Register
-            
-            </button>
-    
-          </div>
-          
-          <button className="loginButton" >
-            Forgot Password
-          </button>
+          <div className="loginFlexbox">
+          <h1 id="welcome_back">Welcome</h1>
+            <div>
+            <input
+                type="text"
+                placeholder="Username"
+                onChange={onUsernameChange}
+                className="username"
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={onPasswordChange}
+                className="password"
+              />
+            </div>
+            <div className="buttonFlexbox">
+                <div><button className="loginButton">Login</button></div>
+                <div><button className="regButton">Register</button></div>
+            </div>
+            <div>
+               <a href="#" className="forgotPassword">Forgot password?</a>
+           </div>
+          </div>  
         </div>
       </div>
     );
