@@ -5,6 +5,7 @@ import Header from './components/Header/Header.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from "./Layout";
 import Login from "./components/LogIn/LogIn"
+import Home from "./components/HomePage/Home"
 
 function App() {
   return ( 
@@ -14,6 +15,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login/>}/>
+            <Route path="/home" element={<Home/>}/>
           </Routes>
         </BrowserRouter>
       </div>

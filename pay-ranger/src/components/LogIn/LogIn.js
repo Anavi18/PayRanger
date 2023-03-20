@@ -60,8 +60,8 @@ export default function LogIn({ changeRoute, loadUser }) {
               />
             </div>
             <div className="buttonFlexbox">
-                <div><button className="loginButton">Login</button></div>
-                <div><button className="regButton">Register</button></div>
+                <div><Link to="/home"><button className="loginButton">Login</button></Link></div>
+                {/*<div><button className="regButton">Register</button></div>*/}
             </div>
             <div>
                <a href="#" className="forgotPassword">Forgot password?</a>
