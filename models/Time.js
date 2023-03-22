@@ -12,3 +12,5 @@ const TimeEntrySchema = new mongoose.Schema({
         hoursWorked : Number
          }]
   });
+
+module.exports = Time_Entries = mongoose.model('Time Entries', TimeEntrySchema);
