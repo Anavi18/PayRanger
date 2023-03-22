@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 function ForgotPassword() {
   return (
-    <div>If you forgot your password, please contact admin at payranger@duckcreek.com.</div>
+    <div class="wait">If you forgot your password, please contact admin at payranger@duckcreek.com.</div>
   )
 }
 export default function LogIn({ changeRoute, loadUser }) {
@@ -20,7 +20,7 @@ export default function LogIn({ changeRoute, loadUser }) {
       setPassword(event.target.value);
     };
 
-    const onForgotPasswordClick = (event) => {
+    const onForgotPasswordClick = (event) => {  
       showForgotPassword(current=>!current);
     };
   
@@ -51,7 +51,7 @@ export default function LogIn({ changeRoute, loadUser }) {
       <div className="login_wrapper">
         <div id = "cover" className="login">
           <div className="loginFlexbox">
-          <h1 id="welcome_back">Welcome</h1>
+            <h1 id="welcome_back">Welcome</h1>
             <div>
             <input
                 type="text"
@@ -73,11 +73,11 @@ export default function LogIn({ changeRoute, loadUser }) {
                 {/*<div><button className="regButton">Register</button></div>*/}
             </div>
             <div>
-               <a href="#" className="forgotPassword" onClick={onForgotPasswordClick}>Forgot password?</a>
+               <a href="#" className="forgotPasswordLink" onClick={onForgotPasswordClick}>Forgot password?</a>
            </div>
-           {forgotPassword && <ForgotPassword/>}
           </div>  
         </div>
+        <div className={forgotPassword ? "forgotPassword forgotPasswordExpanded" : "forgotPassword"}>{forgotPassword && <ForgotPassword/>}</div>
       </div>
     );
   }
