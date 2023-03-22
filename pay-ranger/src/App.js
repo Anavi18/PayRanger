@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import './App.css';
 import Header from './components/Header/Header.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from "./Layout";
 import Login from "./components/LogIn/LogIn"
 import Home from "./components/HomePage/Home"
 

@@ -2,17 +2,26 @@ import React, { useState } from "react";
 import "./LogIn.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
-
+function ForgotPassword() {
+  return (
+    <div>If you forgot your password, please contact admin at payranger@duckcreek.com.</div>
+  )
+}
 export default function LogIn({ changeRoute, loadUser }) {
     let [username, setUsername] = useState("");
     let [password, setPassword] = useState("");
-  
+    let [forgotPassword, showForgotPassword] = useState(false);
+
     const onUsernameChange = (event) => {
       setUsername(event.target.value);
     };
   
     const onPasswordChange = (event) => {
       setPassword(event.target.value);
+    };
+
+    const onForgotPasswordClick = (event) => {
+      showForgotPassword(current=>!current);
     };
   
     const handleErrrors = (res) => {
@@ -64,8 +73,9 @@ export default function LogIn({ changeRoute, loadUser }) {
                 {/*<div><button className="regButton">Register</button></div>*/}
             </div>
             <div>
-               <a href="#" className="forgotPassword">Forgot password?</a>
+               <a href="#" className="forgotPassword" onClick={onForgotPasswordClick}>Forgot password?</a>
            </div>
+           {forgotPassword && <ForgotPassword/>}
           </div>  
         </div>
       </div>
