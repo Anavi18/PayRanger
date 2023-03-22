@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const EmpSchema = new mongoose.Schema({
+const Employee = new mongoose.Schema({
   firstName: {
     type: String,
     required: true
@@ -49,4 +49,4 @@ const EmpSchema = new mongoose.Schema({
   }
 });
 
-module.exports = Employees = mongoose.model('employees',EmpSchema);
+module.exports = Employee = mongoose.model('employees',Employee);
