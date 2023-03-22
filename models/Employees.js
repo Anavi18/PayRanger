@@ -12,7 +12,7 @@ const EmpSchema = new mongoose.Schema({
     required: true
   },
   employeeId: {
-    type: Int,
+    type: Number,
     required: true
   },
   email: {
@@ -20,7 +20,7 @@ const EmpSchema = new mongoose.Schema({
     required: true
   },
   companyId: {
-    type: Int,
+    type: Number,
     required: true
   },
   companyName: {
@@ -28,7 +28,7 @@ const EmpSchema = new mongoose.Schema({
     required: true
   },
   managerId: {
-    type: Int,
+    type: Number,
     required: false
   },
   positionTitle: {
