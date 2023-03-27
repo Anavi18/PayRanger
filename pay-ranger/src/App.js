@@ -3,18 +3,17 @@ import ReactDOM from "react-dom";
 import './App.css';
 import Header from './components/Header/Header.js';
 import Home from './components/HomePage/Home.js'
-import EnterTime from './components/EnterTime.js'
+import LogIn from './components/LogIn/LogIn';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
   return ( 
   <div className="App">
       <div className="imgShadow">
-        <EnterTime/>
-        <Home />
-        <Header />
+        <Header/>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login/>}/>
+            <Route path="/" element={<LogIn/>}/>
             <Route path="/home" element={<Home/>}/>
           </Routes>
         </BrowserRouter>
