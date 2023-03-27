@@ -1,7 +1,7 @@
 
 .login_wrapper {
   text-align: center;
-}
+} 
 .loginFlexbox {
   display: flex;
   flex-direction: column;
@@ -9,11 +9,17 @@
   background-color: white;
   margin: auto; 
   margin-top: 50px;
+  height: 499px;
+  transition: height 1s ease-in-out;
   width: 450px;
 }
 .loginFlexbox > div {
 /*   background-color: green; */
   margin: 10px;
+}
+.flexboxTaller {
+  transition: height 1s ease-in-out;
+  height: 559px;
 }
 #welcome_back {
   font-size: 48px;
@@ -52,7 +58,7 @@
   color: #f5c458;
 }
 .loginButton {
-  width: 160px;
+  width: 360px;
   background-color: #2dd49c;
   cursor: pointer;
   display: inline-block;
@@ -62,6 +68,32 @@
   background-color: #3b298d;
   cursor: pointer;
   display: inline-block;
+}
+.forgotPassword {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 450px;
+  transition: height .3s ease-in-out;
+  height: 0px;
+  margin: auto;
+  background-color: white;
+}
+.forgotPasswordExpanded {
+  transition: height .3s ease-in-out;
+  height: 80px;
+}
+.wait {
+  animation: waitUntilRoom 1s;
+}
+@keyframes waitUntilRoom {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
 /*.login {
     position: absolute;
