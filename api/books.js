@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 // Load Book model
-const Book = require('../../models/Books');
+const Emp = require('../../models/Employee');
 
 // @route GET api/books/test
 // @description tests books route
@@ -15,7 +15,7 @@ router.get('/test', (req, res) => res.send('book route testing!'));
 // @description Get single book by id
 // @access Public
 router.get('/:id', (req, res) => {
-  Book.findById(req.params.id)
+  Emp.findById(req.params.id)
     .then(book => res.json(book))
     .catch(err => res.status(404).json({ nobookfound: 'No Book found' }));
 });
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
 // @description Update book
 // @access Public
 router.put('/:id', (req, res) => {
-  Book.findByIdAndUpdate(req.params.id, req.body)
+  Emp.findByIdAndUpdate(req.params.id, req.body)
     .then(book => res.json({ msg: 'Updated successfully' }))
     .catch(err =>
       res.status(400).json({ error: 'Unable to update the Database' })
