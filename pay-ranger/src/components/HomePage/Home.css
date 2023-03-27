@@ -1,1 +1,58 @@
+.card {
+    background-color: lightblue;
+}
+.m-2 {
+    margin: 20px;
+}
+.enterTime {
+    margin-top: 50px;
+}
+.viewPayroll {
+    margin-top: 50px;
+}
+.viewEmployee {
+    margin-right: 300px;
+    margin-left: 300px;
+}
+.card-body {
 
+}
+.card-title {
+
+}
+.btn-primary {
+    background-color: wheat;
+    border: 10px solid transparent;
+    border-top: 5px solid transparent;
+}
+.row {
+    flex-flow: row wrap;
+    row-gap: 10px;
+    column-gap: 50px;
+}
+.d-flex {
+    display: flex;
+}
+.align-items-center{
+    align-items: center;
+}
+.justify-content-center {
+    justify-content: center;
+}
+h2 {
+    position: absolute;
+    top: -2px;
+    font-size: 32px;
+}
+h5 {
+    font-size: 20px;
+}
+.clock {
+
+}
+.person {
+
+}
+.document {
+
+}
