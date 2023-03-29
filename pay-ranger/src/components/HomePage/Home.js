@@ -40,18 +40,15 @@ const ViewEmployee = () => {
 class Home extends Component{
     render() {
         return (
-            <div className = "row d-flex align-items-center justify-content-center">
-                <h2>HomePage</h2>
-                <EnterTime />
-                <ViewPayroll/>
-                <ViewEmployee />
-                
+	    <div>
+		<h2>Employee Home Page</h2>
+            	<div className = "employee-tiles">
+            	    <EnterTime />
+            	    <ViewPayroll/>
+            	    <ViewEmployee />
+            	</div>
             </div>
-            
-            
         )
-            
-        
     }
 }
 

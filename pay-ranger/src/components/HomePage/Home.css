@@ -39,10 +39,17 @@
 .justify-content-center {
     justify-content: center;
 }
+.employee-tiles {
+    display: flex;
+    flex-flow: row wrap;
+    row-gap: 10px;
+    column-gap: 50px;
+    align-items: center;
+    justify-content: center;
+
+}
 h2 {
-    position: absolute;
-    top: -2px;
-    font-size: 32px;
+    font-size: 48px;
 }
 h5 {
     font-size: 20px;
