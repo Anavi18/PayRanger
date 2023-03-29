@@ -1,11 +1,7 @@
 .App {
   text-align: center;
-  
-}
-
-.imgShadow {
   background-color: #ffffffbb;
-  height: 100vh;
+  min-height: 100vh; 
 }
 
 .App-logo {

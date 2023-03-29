@@ -7,7 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: url(duck_creek_office.jpeg);
   background-size: cover no-repeat;
-
+  min-height: 100vh;
 }
 
 code {
