@@ -8,16 +8,16 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
   return ( 
-  <div className="App">
-      <div className="imgShadow">
-        <Header/>
+  <div className="imgShadow">
+    <div className="App">
+      <Header/>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LogIn/>}/>
             <Route path="/home" element={<Home/>}/>
           </Routes>
         </BrowserRouter>
-      </div>
+    </div>
   </div>
   );
 }
