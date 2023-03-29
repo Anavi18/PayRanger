@@ -8,26 +8,11 @@
 }
 .card:hover {
     background-color: black;
-    color: white;
+    color: #f5c458;
     transition: 300ms;
 }
 .m-2 {
     margin: 20px;
-}
-.enterTime {
-    margin-top: 50px;
-}
-.viewPayroll {
-    margin-top: 50px;
-}
-.viewEmployee {
-
-}
-.card-body {
-
-}
-.card-title {
-
 }
 .btn-primary {
     background-color: wheat;
@@ -48,13 +33,4 @@ h2 {
 }
 h5 {
     font-size: 20px;
-}
-.clock {
-
-}
-.person {
-
-}
-.document {
-
 }

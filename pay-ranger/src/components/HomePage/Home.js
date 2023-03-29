@@ -7,7 +7,6 @@ const EnterTime = () => {
             <div className="card-body">
                 <h5 className="card-title">Enter Time</h5>
                 <div className="clock"></div>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     )
@@ -18,7 +17,6 @@ const ViewPayroll = () => { //not yet sure how to implement adding the images, b
             <div className="card-body">
                 <h5 className="card-title">View Payroll</h5>
                 <div className="document"></div>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     )
@@ -30,7 +28,6 @@ const ViewEmployee = () => {
             <div className="card-body">
                 <h5 className="card-title">View Employee</h5>
                 <div className="person"></div>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     )
