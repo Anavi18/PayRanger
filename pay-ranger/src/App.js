@@ -5,7 +5,7 @@ import Header from "./components/Header/Header.js";
 import Home from "./components/HomePage/Home.js";
 import LogIn from "./components/LogIn/LogIn";
 import EnterTime from "./components/EnterTime/EnterTime";
-import ViewEmployee from "./components/ViewEmployees";
+import ViewEmployee from "./components/ViewEmployee/ViewEmployees";
 import ViewPayroll from "./components/ViewPayroll";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

@@ -2,7 +2,7 @@ import React from "react";
 import Home from "../HomePage/Home";
 import LogIn from "../LogIn/LogIn";
 import EnterTime from "../EnterTime/EnterTime";
-import ViewEmployee from "../ViewEmployees";
+import ViewEmployee from "../ViewEmployee/ViewEmployees";
 import ViewPayroll from "../ViewPayroll";
 import { BrowserRouter, Route, NavLink, Link } from "react-router-dom";
 import "./Header.css";
@@ -18,7 +18,9 @@ function Header() {
       <div className="container-fluid">
         <div className="navbar-brand m-2 ">
           <Link to="/">
-            <a style={{ color: "#bf6ae4" }}>Duck Creek Technologies</a>
+            <a style={{ color: "rgb(193, 108, 108)" }}>
+              Duck Creek Technologies
+            </a>
           </Link>
           <img src={logo} alt="logo" className="logo" />
         </div>

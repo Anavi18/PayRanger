@@ -1,9 +1,51 @@
 .card {
     background-color: lightblue;
 }
+
+.card:hover {
+
+    background-color:#334451
+}
 .card-img-top{
     padding-top: 1.3rem;
+    padding-left: 2.3rem;
     transition: ease-out 0.5s;
     height: 55%;
-    width: 100%;
+    width: 80%;
+    margin-left: 5%;
+    margin-top: 5%;
+
 }
+
+.homebtn{
+    background: chocolate;
+    color: #162938;
+}
+
+.homebtn:hover{
+    background: #2fbead;
+    color: #162938;
+
+}
+
+
+.homebg{
+background: linear-gradient(-45deg,#BD624A, #6985E5);
+background-size: cover;
+animation: gradient 15s ease infinite;
+height: 100vh;
+background-repeat: no-repeat;
+
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 17%;
+    height: 100%;
+    width: 100%;
+    
+}
+

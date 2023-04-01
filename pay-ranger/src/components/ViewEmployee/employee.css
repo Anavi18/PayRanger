@@ -1,0 +1,86 @@
+.employeeBox{
+    gap: 1.5rem;
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 1050px;
+    height: 660px;
+    border: 2px solid rgba(255,255,255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0,0,0,.5);
+    padding: 2rem;
+    background-color: rgb(224, 198, 198);
+
+}
+
+.em_list{
+    width: 100%;
+    border-bottom: none;
+    
+   
+
+}
+.em {
+    border: none;
+    border-bottom: 1px  solid #162938;
+    background-color: rgb(224, 198, 198);
+    margin-bottom: 12px;
+    border-radius: 0;
+    
+}
+.list-group-item:last-child{
+    border-bottom: none;
+}
+
+.srch-parent{
+    margin-top: 22px;
+
+}
+
+.srch-btn{
+    background: #162938;
+    color: #E6986B;
+    border-radius: 30px;
+
+}
+
+.srch-btn:hover{
+    background: #E6986B;
+    color: #162938;
+
+}
+
+.em_search{
+    height: 60px;
+    border-radius: 30px;
+    padding-left: 2rem;
+    border: none;
+  
+}
+
+.list-container{
+    margin-top: 7%;
+    width: 100%;
+    overflow-y: scroll;
+    height: 400px;
+    padding-right: 30px;
+    padding-left: 10px;
+
+}
+
+::-webkit-scrollbar {
+    width: 20px; /* Width of the scrollbar */
+  }
+
+::-webkit-scrollbar-track {
+    background-color: rgb(224, 198, 198); /* Color of the track */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(193, 108, 108); /* Color of the thumb */
+    border-radius: 20px; /* Rounded corners of the thumb */
+    
+  }

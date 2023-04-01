@@ -15,14 +15,23 @@ export default function ViewPayroll() {
 
     const [isClicked, setClicked] = React.useState(false);
     const [wage, setWage] = React.useState(0)
+    const [hour, setHour] = React.useState(0)
 
-    function Wage({wage}) {
+    function Wage({wage, hour}) {
         
         
         return (
-            <div>
-                <button type = "button" class = "btn btn-outline-success">You earned ${wage.toString()}</button>
+            <div >
+                 <div className="btn btn-success text-dark d-flex justify-content-center btn-lg mb-2">
+                    You earned ${wage.toString()}
+                </div>
+                <div className = "btn d-flex justify-content-center btn-lg text-dark" style = {{background: "#E6986B"}}>
+                    {hour.toString()} hour(s) worked
+                    
+                </div>
+
             </div>
+           
         )
     
     }
@@ -34,28 +43,37 @@ export default function ViewPayroll() {
         event.preventDefault()
         setClicked(true)
         setWage( Math.floor(Math.random() * 4000) + 500)
+        setHour( Math.floor(Math.random() * 4000) + 40)
     }
 
     
     return (
-        <div style={{ margin: "5% 40%" }}>
-            <div className="mb-4">
-                <h4>View My Payroll</h4>
+        <div className="homebg">
+            <div className="container">
+                <div className="enterTimeFlexbox">
+                    <div>
+                    <div className="mb-4 d-flex justify-content-center" style = {{color: "#BD5327"}}>
+                        <h4>View My Payroll</h4>
+                    </div>
+                    
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Stack spacing={3}>
+                    <DatePicker label = "FROM" />
+                    <DatePicker label = "TO"/>
+                    
+                    </Stack>
+                    <div className="btn mt-4 enter-btn " onClick={handleSubmit} >View</div>
+                    <div className="mt-4">{isClicked && <Wage wage={wage} hour = {hour}/>}</div>
+
+                    </LocalizationProvider>
+
+                    
+                    </div>
+                </div>
+
             </div>
-            
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Stack spacing={3}>
-            <DatePicker label = "FROM" />
-            <DatePicker label = "TO"/>
-            
-            </Stack>
-            <div className="btn btn-primary mt-4 float-end " onClick={handleSubmit} >View</div>
-            <div className="mt-4">{isClicked && <Wage wage={wage}/>}</div>
-
-            </LocalizationProvider>
-
-            
         </div>
+        
     )
     
 }
