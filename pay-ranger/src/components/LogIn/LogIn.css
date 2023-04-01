@@ -1,91 +1,119 @@
 
 .login_wrapper {
-  text-align: center;
+  
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+ 
+
 } 
-.loginFlexbox {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  margin: auto; 
-  margin-top: 50px;
-  height: 499px;
-  transition: height 1s ease-in-out;
-  width: 450px;
-}
-.loginFlexbox > div {
-/*   background-color: green; */
-  margin: 10px;
-}
-.flexboxTaller {
-  transition: height 1s ease-in-out;
-  height: 559px;
-}
-#welcome_back {
-  font-size: 48px;
-}
-.buttonFlexbox {
-  display: flex;
-  justify-content: center;
-  /* background-color: orange; */
-}
-.buttonFlexbox > div {
-  /* background-color: yellow; */
-  margin: 10px;
-}
-.username,
-.password,
-.loginButton,
-.regButton {
-  margin-bottom: 15px;
-  padding: 20px;
-  width: 360px;
+
+.loginFlexbox .ip input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
   border: none;
-  background-color: #3b4148;
-  color: white;
-  font-size: x-large;
-  font-family: inherit;
-  border-radius: 0.25rem;
-  transition: 300ms;
+  outline: none;
+  padding: 0 35px 0 5px;
 }
-.username:hover,
-.password:hover {
-    background-color: #434a52;
+
+.loginFlexbox .ip{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px  solid #162938;
+  margin: 30px 0;
+  padding: 2px;;
+  
+  
 }
-.loginButton:hover, 
-.regButton:hover {
-  background-color: black;
-  color: #f5c458;
+
+
+
+.login_wrapper::before{
+  content: "";
+  background: url('../pictures/boston_bg2_jpeg.webp');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+
 }
-.loginButton {
-  width: 360px;
-  background-color: #2dd49c;
-  cursor: pointer;
-  display: inline-block;
-}
-.regButton {
-  width: 160px;
-  background-color: #3b298d;
-  cursor: pointer;
-  display: inline-block;
-}
-.forgotPassword {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
+
+
+.loginFlexbox {
+  gap: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 450px;
-  transition: height .3s ease-in-out;
-  height: 0px;
-  margin: auto;
-  background-color: white;
+  height: 460px;
+  border: 2px solid rgba(255,255,255, .5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+  padding: 2rem;
+
+  
 }
-.forgotPasswordExpanded {
-  transition: height .3s ease-in-out;
-  height: 80px;
+
+.loginFlexbox h1{
+  font-size: 2em;
+  text-align: center;
+  color: #162938;
+
+
 }
+
+
+.loginFlexbox .loginButton{
+  width: 100%;
+  height: 50px;
+  background: #162938;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: #d2691e;
+  font-weight: 500;
+
+  
+
+}
+
+.loginButton:hover{
+  color:  #162938;
+  background: chocolate;
+
+}
+
+
+.forgotpw{
+  color: antiquewhite;
+  position: relative;
+  left: 35%;
+  
+
+}
+
+.forgotpw:hover{
+  color: #162938;
+}
+
 .wait {
   animation: waitUntilRoom 1s;
+  position: relative;
+  color: antiquewhite;
+  font-size: 15px;
+  left: 5%;
+
 }
 @keyframes waitUntilRoom {
   0% {
@@ -95,125 +123,3 @@
     opacity: 100%;
   }
 }
-/*.login {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: #ffffff55;
-  }
-  #cover {
-      padding: 6rem;
-  }
-  .login_wrapper {
-    background-size: cover;
-    position: relative;
-    max-width: 100%;
-    height: 50vh;
-    background-attachment: fixed;
-    background-image: url(duck_creek_office.jpeg);
-  }
-  
-  .reg_wrapper {
-    background: #c9b68e;
-    background-size: cover;
-    position: relative;
-    max-width: 100%;
-    height: 100vh;
-    background-attachment: fixed;
-  }
-  
-  body {
-    background-color: rgb(239, 239, 239);
-  }
-  ::placeholder {
-    color: #a1a8af;
-  }
-  .username,
-  .password,
-  .loginButton,
-  .regButton,
-  .forgotPassword,
-  .name {
-    display: block;
-    margin-bottom: 15px;
-    padding: 20px;
-    width: 360px;
-    border: none;
-    background-color: #3b4148;
-    color: white;
-    font-size: x-large;
-    border-radius: 0.25rem;
-  }
-  
-  .loginButton {
-    width: 160px;
-    background-color: #58f560;
-    color: black;
-    cursor: pointer;
-    display: inline-block;
-    margin-left: auto;
-    margin-right: 5%;
-  }
-  .regButton {
-    width: 160px;
-    background-color: #b658f5;
-    color: black;
-    cursor: pointer;
-    display: inline-block;
-    margin-left: 5%;
-    margin-right: auto;
-  }
-  .loginButton:hover {
-    background-color: black;
-    color: #f5c458;
-  }
-  .loginButton:active {
-  }
-  .forgotPassword {
-    margin-left: 5%;
-    padding: 2%;
-    width: 360px;
-    background-color: #ffe3d0;
-    color: black;
-    cursor: pointer;
-  }
-  .username:hover,
-  .password:hover {
-    background-color: #434a52;
-  }
-  
-  .signup-option {
-    text-align: center;
-    padding: 5px;
-    color: #6c757d;
-    font-size: large;
-  }
-  
-  .signup-option a {
-    text-decoration: none;
-    color: #f5c458;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #565656;
-  }
-  
-  .logo img {
-    margin-left: 9px;
-    width: 30px;
-    height: 30px;
-  }
-  
-  #welcome_back {
-    margin-bottom: 50px;
-    color: #0c0903;
-  }
-  
-  .reg_title {
-    margin-bottom: 50px;
-    color: black;
-  }
-*/

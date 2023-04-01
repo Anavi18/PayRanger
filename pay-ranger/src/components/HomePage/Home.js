@@ -1,24 +1,29 @@
 import React, {Component} from "react";
+import {Link} from 'react-router-dom';
 import "./Home.css";
+import clock from "../pictures/clock.jpeg"
+import money from "../pictures/money.jpeg"
+import employee from "../pictures/employee.jpeg"
 
 const EnterTime = () => {
     return (
-        <div className="card m-2 enterTime" style={{width: '30em', height: '20em'}}>
-            <div className="card-body">
-                <h5 className="card-title">Enter Time</h5>
-                <div className="clock"></div>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+        <div className="card m-2 col-4  " style={{width: '20em', height: '22em'}}>
+            <img src={clock} className="card-img-top" alt="..."></img>
+            <div className="card-body mt-2">
+                <h5 className="card-title ">Enter Time</h5>
+                <Link to ="/entertime" ><a href="#" className="btn btn-primary">Enter Time</a></Link>
             </div>
         </div>
     )
 }
-const ViewPayroll = () => { //not yet sure how to implement adding the images, but I've added divs to each where they should go along with the start of some css in Home.css.
+const ViewPayroll = () => { 
     return (
-        <div className="card m-2 viewPayroll" style={{width: '30em', height: '20em'}}>
-            <div className="card-body">
+        <div className="card m-2 col-4" style={{width: '20em', height: '22em'}}>
+            <img src={money} className="card-img-top" alt="..."></img>
+            <div className="card-body mt-2">
                 <h5 className="card-title">View Payroll</h5>
                 <div className="document"></div>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <Link to ="/payroll" ><a href="#" className="btn btn-primary">View Payroll</a></Link>
             </div>
         </div>
     )
@@ -26,11 +31,12 @@ const ViewPayroll = () => { //not yet sure how to implement adding the images, b
 }
 const ViewEmployee = () => {
     return (
-        <div className="card m-2 viewEmployee" style={{width: '30em', height: '20em'}}>
-            <div className="card-body">
+        <div className="card m-2 col-4 " style={{width: '20em', height: '22em'}}>
+            <img src={employee} className="card-img-top" alt="..."></img>
+            <div className="card-body mt-2">
                 <h5 className="card-title">View Employee</h5>
                 <div className="person"></div>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <Link to ="/employee" ><a href="#" className="btn btn-primary">View Employee</a></Link>
             </div>
         </div>
     )
@@ -40,14 +46,11 @@ const ViewEmployee = () => {
 class Home extends Component{
     render() {
         return (
-	    <div>
-		<h2>Employee Home Page</h2>
-            	<div className = "employee-tiles">
-            	    <EnterTime />
-            	    <ViewPayroll/>
-            	    <ViewEmployee />
-            	</div>
-            </div>
+	    <div className=" d-flex align-items-center justify-content-center mt-5 ">
+            <EnterTime />
+            <ViewPayroll/>
+            <ViewEmployee />
+        </div>
         )
     }
 }

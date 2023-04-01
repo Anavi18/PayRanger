@@ -1,12 +1,19 @@
-.App-header {
-    background-color: #3b298d;
-    min-height: 10vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 2%;
-    font-size: calc(10px + 2vmin);
-    color: white;
+
+.nav-item {
+    display: inline-block;
+    padding: 12px 20px;
+  
+  }
+
+#menu {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+
+#menu a:hover{
+    color:#b275cc;
 }
 
