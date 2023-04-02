@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header/Header.js';
 import Home from './components/HomePage/Home.js'
 import LogIn from './components/LogIn/LogIn';
+import EnterTime from './components/EnterTime';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LogIn/>}/>
             <Route path="/home" element={<Home/>}/>
+            <Route path="/enter-time" element={<EnterTime/>}/>
           </Routes>
         </BrowserRouter>
     </div>

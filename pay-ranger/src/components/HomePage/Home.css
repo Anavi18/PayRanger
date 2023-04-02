@@ -1,3 +1,7 @@
+*{
+/* Disable text-decoration on the entire page, to remove underlines on links*/
+    text-decoration: none;
+}
 .card {
     background-color: white;
     border-radius: 5px;

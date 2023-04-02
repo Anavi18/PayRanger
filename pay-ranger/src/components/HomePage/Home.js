@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import "./Home.css";
 import time from './Icons/enter-time.svg';
 import payroll from './Icons/view-payroll.svg';
@@ -6,12 +7,12 @@ import employee from './Icons/view-employee.svg';
 
 const EnterTime = () => {
     return (
-        <div className="card m-2 enterTime" style={{width: '30em', height: '20em'}}>
+        <Link to="/enter-time"><div className="card m-2 enterTime" style={{width: '30em', height: '20em'}}>
             <div className="card-body">
                 <h5 className="card-title">Enter Time</h5>
                 <div className="clock"><img src={time} type="image/svg+xml" alt="A picture of a clock. Click this to enter time worked." width="33%" height="33%"></img></div>
             </div>
-        </div>
+        </div></Link>
     )
 }
 const ViewPayroll = () => { //not yet sure how to implement adding the images, but I've added divs to each where they should go along with the start of some css in Home.css.
