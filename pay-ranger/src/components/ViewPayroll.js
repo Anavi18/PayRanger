@@ -6,7 +6,24 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 
 
+function Wage({wage, hour}) {
+        
+        
+    return (
+        <div >
+             <div className="btn btn-success text-dark d-flex justify-content-center btn-lg mb-2">
+                You earned ${wage.toString()}
+            </div>
+            <div className = "btn d-flex justify-content-center btn-lg text-dark" style = {{background: "#E6986B"}}>
+                {hour.toString()} hour(s) worked
+                
+            </div>
 
+        </div>
+       
+    )
+
+}
 
 
 
@@ -17,24 +34,7 @@ export default function ViewPayroll() {
     const [wage, setWage] = React.useState(0)
     const [hour, setHour] = React.useState(0)
 
-    function Wage({wage, hour}) {
-        
-        
-        return (
-            <div >
-                 <div className="btn btn-success text-dark d-flex justify-content-center btn-lg mb-2">
-                    You earned ${wage.toString()}
-                </div>
-                <div className = "btn d-flex justify-content-center btn-lg text-dark" style = {{background: "#E6986B"}}>
-                    {hour.toString()} hour(s) worked
-                    
-                </div>
-
-            </div>
-           
-        )
     
-    }
 
     
 
@@ -52,7 +52,7 @@ export default function ViewPayroll() {
             <div className="container">
                 <div className="enterTimeFlexbox">
                     <div>
-                    <div className="mb-4 d-flex justify-content-center" style = {{color: "#BD5327"}}>
+                    <div className="mb-4 d-flex justify-content-center" style = {{color: "#162938"}}>
                         <h4>View My Payroll</h4>
                     </div>
                     

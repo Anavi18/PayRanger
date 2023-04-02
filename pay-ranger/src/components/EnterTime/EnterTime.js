@@ -49,7 +49,7 @@ export default function EnterTime() {
       <div className="container">
         <div className="enterTimeFlexbox">
         <div >
-          <div className="mb-4 d-flex justify-content-center" style = {{color: "#BD5327"}}>
+          <div className="mb-4 d-flex justify-content-center" style = {{color: "#162938"}}>
             <h4>Enter Your Time</h4>
           </div>
 

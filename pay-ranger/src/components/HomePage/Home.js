@@ -50,7 +50,7 @@ class Home extends Component{
         <div className="homebg ">
         
 
-        <div className=" container">
+        <div className=" container d-flex align-items-center">
            
             <EnterTime />
             <ViewPayroll/>
