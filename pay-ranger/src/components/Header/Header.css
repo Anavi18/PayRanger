@@ -22,6 +22,9 @@
     margin-left: auto;
     column-gap: 1vw;
 }
+.profileDropdownHidden {
+    display: none;
+}
 .profileDropdown {
     position: absolute;
     right: 0px;
@@ -30,14 +33,24 @@
     font-size: 24px;
     text-align: left;
     width: 250px;
-    padding-left: 25px;
     background-color: white;
     display: flex;
     flex-direction: column;
+    border-left: solid;
+    border-bottom: solid;
+    border-color: grey;
+    border-width: 1px;
+    border-bottom-left-radius: 5px;
 }
-.profileDropdown p:hover {
+.profileDropdown div {
+    padding: 25px;
+}
+.profileDropdown a {
+    color: inherit;
+}
+.profileDropdown div:hover{
     background-color: black;
-    color: #f5c458;
+    color:#f5c458;
     transition: 300ms;
 }
 @media (max-width: 465px) {
