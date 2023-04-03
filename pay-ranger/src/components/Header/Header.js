@@ -5,12 +5,13 @@ import avatar from "./Icons/avatar.svg";
 function Header() {
     return (
       <div className="App-header">
-        <div className="Logo"> Duck Creek Technologies 
-         <img src={logo} alt="logo"/>
+        <div className="Logo"> 
+          <div className="LogoName"> Duck Creek Technologies</div>
+          <div><img src={logo} alt="logo"/></div>
         </div>
         <div className="Avatar">
-          Employee Name
-          <img src={avatar} alt="Click here for employee navigation options" className="logo" />
+          <div className="Name">Employee Name</div>
+          <div><img src={avatar} alt="Click here for employee navigation options" className="logo" /></div>
         </div>
       </div>
     )

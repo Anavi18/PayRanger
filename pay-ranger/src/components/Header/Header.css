@@ -5,11 +5,28 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 2%;
     font-size: calc(10px + 2vmin);
     color: white;
 }
-.Avatar {
-    margin-left: auto;
+.Logo {
+    display: flex;
+    flex-direction: row wrap;
+    align-items: center;
+    column-gap: 1vw;
+    padding-left: 10px;
 }
-
+.Avatar {
+    display: flex; 
+    flex-direction: row wrap;
+    align-items: center;
+    margin-left: auto;
+    column-gap: 1vw;
+}
+@media (max-width: 465px) {
+    .Name {
+        display: none;
+    }
+    .LogoName {
+        display: none;
+    }
+}
