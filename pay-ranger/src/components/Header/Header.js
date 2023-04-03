@@ -13,6 +13,20 @@ function Header() {
           <div className="Name">Employee Name</div>
           <div><img src={avatar} alt="Click here for employee navigation options" className="logo" /></div>
         </div>
+        <div className="profileDropdown">
+          <p>
+            Log Out
+          </p>
+          <p>
+            Enter Time
+          </p>
+          <p>
+            View Payroll
+          </p>
+          <p>
+            View Employee
+          </p>
+        </div>
       </div>
     )
 }

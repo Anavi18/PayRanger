@@ -1,6 +1,6 @@
 .App-header {
     background-color: #3b298d;
-    min-height: 10vh;
+    height: 10vh;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,6 +21,24 @@
     align-items: center;
     margin-left: auto;
     column-gap: 1vw;
+}
+.profileDropdown {
+    position: absolute;
+    right: 0px;
+    top: 10vh;
+    color: black;
+    font-size: 24px;
+    text-align: left;
+    width: 250px;
+    padding-left: 25px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+.profileDropdown p:hover {
+    background-color: black;
+    color: #f5c458;
+    transition: 300ms;
 }
 @media (max-width: 465px) {
     .Name {
