@@ -11,8 +11,8 @@ function App() {
   return ( 
   <div className="imgShadow">
     <div className="App">
-      <Header/>
         <BrowserRouter>
+          <Header/>
           <Routes>
             <Route path="/" element={<LogIn/>}/>
             <Route path="/home" element={<Home/>}/>
@@ -25,4 +25,3 @@ function App() {
 }
 
 export default App;
-ReactDOM.render(<App />, document.getElementById("root"));

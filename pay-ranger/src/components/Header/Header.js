@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./Header.css";
 import logo from "./cropped-duck-creek-favicon-32x32.webp";
 import avatar from "./Icons/avatar.svg";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 function Header() {
     let [dropdown, showProfileDropdown] = useState(false);
     const toggleDropdown = (event) => {
@@ -20,19 +20,19 @@ function Header() {
         </div>
         <div className={dropdown ? "profileDropdown" : "profileDropdownHidden"}>
           <div>
-            <a href="/">Log Out</a>
+            <Link to="/">Log Out</Link>
           </div>
           <div>
-            <a href="/enter-time">Enter Time</a>
+            <Link to="/enter-time">Enter Time</Link>
           </div>
           <div>
-            <a href="/view-payroll">View Payroll</a>
+            <Link to="/view-payroll">View Payroll</Link>
           </div>
           <div>
-            <a href="/view-employee">View Employee</a>
+            <Link to="/view-employee">View Employee</Link>
           </div>
           <div>
-            <a href="/home">My Dashboard</a>
+            <Link to="/home">My Dashboard</Link>
           </div>
         </div>
       </div>
