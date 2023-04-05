@@ -7,23 +7,35 @@ import LogIn from './components/LogIn/LogIn';
 import EnterTime from './components/EnterTime';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {LoginProvider} from './LoginContext';
+import { DropdownContext, DropdownProvider } from './DropdownContext';
+import { useContext } from 'react';
+
+function Body() {
+  let dropdownPair = useContext(DropdownContext);
+  return (
+    <div className="imgShadow" onClick={()=>dropdownPair.toggleDropdown(current => !current)}>
+              <div className="App">
+                <Header/>
+                <Routes>
+                  <Route path="/" element={<LogIn/>}/>
+                  <Route path="/home" element={<Home/>}/>
+                  <Route path="/enter-time" element={<EnterTime/>}/>
+                </Routes>
+              </div>
+      </div>
+  );
+}
 
 function App() {
   return ( 
-  <div className="imgShadow">
-    <div className="App">
-        <BrowserRouter>
-          <LoginProvider>
-            <Header/>
-            <Routes>
-              <Route path="/" element={<LogIn/>}/>
-              <Route path="/home" element={<Home/>}/>
-              <Route path="/enter-time" element={<EnterTime/>}/>
-            </Routes>
-          </LoginProvider>
-        </BrowserRouter>
-    </div>
-  </div>
+    <BrowserRouter>
+      <LoginProvider>
+        <DropdownProvider>
+            <Body/>
+        </DropdownProvider>
+      </LoginProvider>
+    </BrowserRouter>
+    
   );
 }
 
