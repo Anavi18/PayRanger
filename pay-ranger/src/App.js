@@ -15,12 +15,12 @@ function App() {
         <BrowserRouter>
           <LoginProvider>
             <Header/>
+            <Routes>
+              <Route path="/" element={<LogIn/>}/>
+              <Route path="/home" element={<Home/>}/>
+              <Route path="/enter-time" element={<EnterTime/>}/>
+            </Routes>
           </LoginProvider>
-          <Routes>
-            <Route path="/" element={<LogIn/>}/>
-            <Route path="/home" element={<Home/>}/>
-            <Route path="/enter-time" element={<EnterTime/>}/>
-          </Routes>
         </BrowserRouter>
     </div>
   </div>

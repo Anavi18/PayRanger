@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import "./Header.css";
 import logo from "./cropped-duck-creek-favicon-32x32.webp";
 import avatar from "./Icons/avatar.svg";
 import { Link } from "react-router-dom";
+import { LoginContext } from "../../LoginContext";
 function Header() {
     let [dropdown, showProfileDropdown] = useState(false);
+    let loginPair = useContext(LoginContext);
     const toggleDropdown = (event) => {
       showProfileDropdown(current=>!current);
     };
@@ -18,7 +20,7 @@ function Header() {
           <div className="Name">Employee Name</div>
           <div><a href="#" onClick={toggleDropdown}><img src={avatar} alt="Click here for employee navigation options" className="logo" /></a></div>
         </div>
-        <div className={dropdown ? "profileDropdown" : "profileDropdownHidden"}>
+        <div className={dropdown && loginPair.isLoggedIn ? "profileDropdown" : "profileDropdownHidden"}>
           <div>
             <Link to="/">Log Out</Link>
           </div>

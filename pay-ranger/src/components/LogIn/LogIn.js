@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./LogIn.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { useContext } from "react";
+import { LoginContext } from "../../LoginContext";
 
 function ForgotPassword() {
   return (
@@ -11,7 +13,8 @@ export default function LogIn({ changeRoute, loadUser }) {
     let [username, setUsername] = useState("");
     let [password, setPassword] = useState("");
     let [forgotPassword, showForgotPassword] = useState(false);
-
+    let loginPair = useContext(LoginContext);
+    console.log(loginPair);
     const onUsernameChange = (event) => {
       setUsername(event.target.value);
     };
@@ -69,11 +72,13 @@ export default function LogIn({ changeRoute, loadUser }) {
               />
             </div>
             <div className="buttonFlexbox">
-                <div><Link to="/home"><button className="loginButton">Login</button></Link></div>
+                <div><Link to="/home"><button className="loginButton" onClick={()=>{loginPair.setIsLoggedIn(current=>!current)}}>Log In</button></Link></div>
                 {/*<div><button className="regButton">Register</button></div>*/}
             </div>
             <div>
                <a href="#" className="forgotPasswordLink" onClick={onForgotPasswordClick}>Forgot password?</a>
+           </div>
+           <div>
            </div>
           </div>  
         </div>
