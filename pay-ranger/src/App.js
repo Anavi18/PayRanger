@@ -6,13 +6,16 @@ import Home from './components/HomePage/Home.js'
 import LogIn from './components/LogIn/LogIn';
 import EnterTime from './components/EnterTime';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {LoginProvider} from './LoginContext';
 
 function App() {
   return ( 
   <div className="imgShadow">
     <div className="App">
         <BrowserRouter>
-          <Header/>
+          <LoginProvider>
+            <Header/>
+          </LoginProvider>
           <Routes>
             <Route path="/" element={<LogIn/>}/>
             <Route path="/home" element={<Home/>}/>
