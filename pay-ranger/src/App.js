@@ -13,7 +13,7 @@ import { useContext } from 'react';
 function Body() {
   let dropdownPair = useContext(DropdownContext);
   return (
-    <div className="imgShadow" onClick={()=>dropdownPair.toggleDropdown(current => !current)}>
+    <div className="imgShadow" onClick={()=>dropdownPair.toggleDropdown(current => false)}>
               <div className="App">
                 <Header/>
                 <Routes>
