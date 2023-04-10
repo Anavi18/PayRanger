@@ -12,17 +12,18 @@ import {LoginProvider} from './LoginContext';
 import { DropdownContext, DropdownProvider } from './DropdownContext';
 import { useContext } from 'react';
 
-function App() {
-  return ( 
-  <div className="App">
-      <div className="imgShadow">
+function Body() {
+  let dropdownPair = useContext(DropdownContext);
+  return (
+      <div className="App">
         <Header/>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LogIn/>}/>
-            <Route path="/home" element={<Home/>}/>
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LogIn/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/enter-time" element={<EnterTime/>}/>
+          <Route path="/payroll" element={<ViewPayroll/>}/>
+          <Route path="/employee" element={<ViewEmployees/>}/>
+        </Routes>
       </div>
   );
 }
