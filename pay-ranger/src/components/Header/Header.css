@@ -1,19 +1,63 @@
-
-.nav-item {
-    display: inline-block;
-    padding: 12px 20px;
-  
-  }
-
-#menu {
-    position: sticky;
-    top: 0;
-    overflow: hidden;
-    z-index: 9999;
+.App-header {
+    background-color: #3b298d;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
-
-
-#menu a:hover{
-    color:#b275cc;
+.Logo {
+    display: flex;
+    flex-direction: row wrap;
+    align-items: center;
+    column-gap: 1vw;
+    padding-left: 10px;
 }
-
+.Avatar {
+    display: flex; 
+    flex-direction: row wrap;
+    align-items: center;
+    margin-left: auto;
+    column-gap: 1vw;
+}
+.profileDropdownHidden {
+    display: none;
+}
+.profileDropdown {
+    position: absolute;
+    right: 0px;
+    top: 10vh;
+    color: black;
+    font-size: 24px;
+    text-align: left;
+    width: 250px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-left: solid;
+    border-bottom: solid;
+    border-color: grey;
+    border-width: 1px;
+    border-bottom-left-radius: 5px;
+}
+.profileDropdown div {
+    padding: 25px;
+}
+.profileDropdown a {
+    color: inherit;
+}
+.profileDropdown div:hover{
+    background-color: black;
+    color:#f5c458;
+    transition: 300ms;
+}
+@media (max-width: 465px) {
+    .Name {
+        display: none;
+    }
+    .LogoName {
+        display: none;
+    }
+}
