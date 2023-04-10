@@ -21,39 +21,37 @@ const styleCardWords = {
 
 
 const EnterTime = () => {
-    const handleButtonClick = () => {
-        window.location.href = '/entertime';
-      };
-
 
       return (
-        <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } } onClick={handleButtonClick}>
-            <img src={enterTimeSymbol} className="card-img-top" alt="..."></img>
-            <h1 style={styleCardWords}> Enter Time </h1>
-        </div>
+        <Link to="/entertime">
+            <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } }>
+                <img src={enterTimeSymbol} className="card-img-top" alt="..."></img>
+                <h1 style={styleCardWords}> Enter Time </h1>
+            </div>
+        </Link>
       );
     }
 const ViewPayroll = () => {
-    const handleButtonClick = () => {
-        window.location.href = '/payroll';
-      };
+
     return (
-        <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } } onClick={handleButtonClick}>
-            <img src={payrollLogo} className="card-img-top" alt="..."></img>
-            <h1 style={styleCardWords}> View Payroll </h1>
-        </div>
+        <Link to="/payroll">
+            <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } }>
+                <img src={payrollLogo} className="card-img-top" alt="..."></img>
+                <h1 style={styleCardWords}> View Payroll </h1>
+            </div>
+        </Link>
     )
    
 }
 const ViewEmployee = () => {
-    const handleButtonClick = () => {
-        window.location.href = '/employee';
-      };
+
     return (
-        <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } } onClick={handleButtonClick}>
-            <img src={employeeLogo} className="card-img-top" alt="..."></img>
-            <h1 style={styleCardWords}> View Employees </h1>
-        </div>
+        <Link to="/employee">
+            <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } }>
+                <img src={employeeLogo} className="card-img-top" alt="..."></img>
+                <h1 style={styleCardWords}> View Employees </h1>
+            </div>
+        </Link>
     )
    
 }
