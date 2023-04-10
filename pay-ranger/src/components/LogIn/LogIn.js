@@ -3,18 +3,26 @@ import "./LogIn.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../LoginContext";
+<<<<<<< HEAD
+=======
+import Header from "../Header/Header";
+
+>>>>>>> newScheme
 
 function ForgotPassword() {
   return (
-    <div class="wait">If you forgot your password, please contact admin at payranger@duckcreek.com.</div>
+    <div className="wait ">Please contact admin at payranger@duckcreek.com!</div>
   )
 }
-export default function LogIn({ changeRoute, loadUser }) {
+export default function LogIn() {
     let [username, setUsername] = useState("");
     let [password, setPassword] = useState("");
     let [forgotPassword, showForgotPassword] = useState(false);
     let loginPair = useContext(LoginContext);
+<<<<<<< HEAD
     console.log(loginPair);
+=======
+>>>>>>> newScheme
     const onUsernameChange = (event) => {
       setUsername(event.target.value);
     };
@@ -24,34 +32,13 @@ export default function LogIn({ changeRoute, loadUser }) {
     };
 
     const onForgotPasswordClick = (event) => {  
-      showForgotPassword(current=>!current);
+      showForgotPassword(true);
     };
   
-    const handleErrrors = (res) => {
-      if (!res.ok){
-        alert("Incorrect Username/Password");
-        throw Error(res.statusText)
-      }
-      else{
-        return res.json();
-      }
-      }
-  
-    const onSubmitSignIn = () => {
-      if(username.length === 0 || password.length === 0){
-        alert("Missing field")
-      }
-      else{
-        loadUser({
-          username: username,
-          password: password
-        });
-        changeRoute(3);
-      }
-    }
-  
     return (
+      <div className="loginbg">
       <div className="login_wrapper">
+<<<<<<< HEAD
         <div id = "cover" className="login">
           <div className="loginFlexbox">
             <h1 id="welcome_back">Welcome</h1>
@@ -83,6 +70,37 @@ export default function LogIn({ changeRoute, loadUser }) {
           </div>  
         </div>
         <div className={forgotPassword ? "forgotPassword forgotPasswordExpanded" : "forgotPassword"}>{forgotPassword && <ForgotPassword/>}</div>
+=======
+            <div className="loginFlexbox justify-content-center align-items-center ">
+              <h1>Login</h1>
+              <div className="ip">
+                <input
+                    type="text"
+                    placeholder="Username"
+                    onChange={onUsernameChange}
+                  />
+              </div>
+
+              <div className="ip">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  onChange={onPasswordChange}
+                />
+              </div>
+            
+              <Link to="/home"><button className="loginButton"  onClick={()=>{loginPair.setIsLoggedIn(current=>!current)}}>Login</button></Link>
+           
+              <div className="mt-4 ">
+                <a href="#" class= "forgotpw" onClick={onForgotPasswordClick}>Forgot password?</a>
+              </div>
+              <div className="mt-3">{forgotPassword && <ForgotPassword/>}</div>
+            </div>  
+          
+          
+        
+>>>>>>> newScheme
       </div>
+      </div>  
     );
   }

@@ -22,7 +22,11 @@ function Header() {
       return(
         <div className={dropdownPair.dropdown ? "profileDropdown" : "profileDropdownHidden"}>
           <div>
+<<<<<<< HEAD
             Logged Out
+=======
+            <Link to="/">Logged Out</Link>
+>>>>>>> newScheme
           </div>
         </div>
       )
@@ -36,10 +40,10 @@ function Header() {
             <Link to="/enter-time">Enter Time</Link>
           </div>
           <div>
-            <Link to="/view-payroll">View Payroll</Link>
+            <Link to="/payroll">View Payroll</Link>
           </div>
           <div>
-            <Link to="/view-employee">View Employee</Link>
+            <Link to="/employee">View Employee</Link>
           </div>
           <div>
             <Link to="/home">My Dashboard</Link>

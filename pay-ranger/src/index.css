@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -8,9 +9,8 @@ body {
   background: url(duck_creek_office.jpeg);
   background-size: cover no-repeat;
   min-height: 100vh;
+=======
+  overflow: hidden; /* always show scrollbar */
+>>>>>>> newScheme
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
