@@ -12,7 +12,10 @@ app.get("/getEmployees", async (req, res) => {
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
         if(employee.isManager){
             data = await employeeModel.find({managerId: employee.employeeId});
-            res.json(data) 
+            res.json(data)
+        }
+        else {
+            res.json({})
         }
     }catch(error){
         res.json(error)
