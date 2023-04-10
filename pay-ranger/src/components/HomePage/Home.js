@@ -23,7 +23,7 @@ const styleCardWords = {
 const EnterTime = () => {
 
       return (
-        <Link to="/entertime">
+        <Link to="/enter-time">
             <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } }>
                 <img src={enterTimeSymbol} className="card-img-top" alt="..."></img>
                 <h1 style={styleCardWords}> Enter Time </h1>
