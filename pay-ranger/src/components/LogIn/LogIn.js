@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./LogIn.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
+import { useContext } from "react";
+import { LoginContext } from "../../LoginContext";
 
 
 function ForgotPassword() {
@@ -12,7 +14,7 @@ export default function LogIn() {
     let [username, setUsername] = useState("");
     let [password, setPassword] = useState("");
     let [forgotPassword, showForgotPassword] = useState(false);
-
+    let loginPair = useContext(LoginContext);
     const onUsernameChange = (event) => {
       setUsername(event.target.value);
     };
@@ -45,7 +47,7 @@ export default function LogIn() {
                 />
               </div>
             
-              <Link to="/home"><button className="loginButton">Login</button></Link>
+              <Link to="/home"><button className="loginButton"  onClick={()=>{loginPair.setIsLoggedIn(current=>!current)}}>Login</button></Link>
            
               <div className="mt-4 ">
                 <a href="#" class= "forgotpw" onClick={onForgotPasswordClick}>Forgot password?</a>
