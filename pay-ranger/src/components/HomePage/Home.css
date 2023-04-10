@@ -1,10 +1,16 @@
+
+
 .card {
-    background-color: rgb(224, 198, 198);
+    /* background-color: rgb(224, 198, 198); original*/
+    /* background-color: rgb(255, 255, 255); */
+    background: rgba(255, 255, 255, 0.9); /* 0.8 opacity */
+    backdrop-filter: blur(10px); /* 10px blur */
 }
 
 .card:hover {
 
-    background-color:#334451
+    /* background-color:#334451 */
+    background-color:#3e5f79
 }
 .card-img-top{
     padding-top: 1.3rem;
@@ -30,7 +36,10 @@
 
 
 .homebg{
-background: linear-gradient(-45deg,#BD624A, #6985E5);
+/* background: linear-gradient(-45deg,#BD624A, #6985E5); */
+/* background: linear-gradient(-45deg,rgb(103, 197, 132), rgb(62, 62, 129)); */
+background: url('../pictures/boston_bg2_jpeg.webp'); 
+/* background: url('../pictures/DuckCreekBacking.jpg'); */
 background-size: cover;
 animation: gradient 15s ease infinite;
 height:100vh;
@@ -43,10 +52,14 @@ width: 100%;
 .container{
     display: flex;
     justify-content: center;
-  
-    height: 100vh;
+
+    /* height: 100vh; */
+    height: 85vh;
     width: 100%;
     overflow: hidden;
     
 }
+
+
+
 

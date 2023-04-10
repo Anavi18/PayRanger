@@ -17,7 +17,7 @@
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0,0,0,.5);
     padding: 2rem;
-    background-color: rgb(224, 198, 198);
+    background-color: rgb(255, 255, 255);
 
 
 }
@@ -30,13 +30,16 @@
     border-radius: 6px;
     cursor: pointer;
     font-size: 1.5em;
-    color: rgb(224, 198, 198);
+    /* color: rgb(224, 198, 198); */
+    color: rgb(255, 255, 255);
     font-weight: 500;
 
   
 }
 .enter-btn:hover{
-    background:   rgb(193, 108, 108);
-    color: #162938;
+    /* background:   rgb(193, 108, 108); 
+    color: #162938;*/
+    background: rgb(36, 52, 116);
+    color: #ffffff;
 
 }

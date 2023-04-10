@@ -4,43 +4,58 @@ import "./Home.css";
 import clock from "../pictures/clock.jpeg"
 import money from "../pictures/money.jpeg"
 import employee from "../pictures/employee.jpeg"
+import enterTimeSymbol from "../pictures/timeClock.png"
+import employeeLogo from "../pictures/employeeLogo.png"
+import payrollLogo from "../pictures/payrollLogoGreen.png"
+
+const styleCardWords = {
+    fontSize: '2rem',
+    fontWeight: 'bold',
+    margin: '0',
+    marginTop: '3rem',
+    padding: '0.5rem',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    color: 'black',
+};
+
 
 const EnterTime = () => {
+    const handleButtonClick = () => {
+        window.location.href = '/entertime';
+      };
+
+
+      return (
+        <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } } onClick={handleButtonClick}>
+            <img src={enterTimeSymbol} className="card-img-top" alt="..."></img>
+            <h1 style={styleCardWords}> Enter Time </h1>
+        </div>
+      );
+    }
+const ViewPayroll = () => {
+    const handleButtonClick = () => {
+        window.location.href = '/payroll';
+      };
     return (
-        <div className="card m-2 col-4  " style={{width: '20em', height: '25em'}}>
-            <img src={clock} className="card-img-top" alt="..."></img>
-            <div className="card-body mt-2 mx-auto">
-               
-                <Link to ="/entertime" ><a href="#" className="btn btn-lg homebtn">Enter Time</a></Link>
-            </div>
+        <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } } onClick={handleButtonClick}>
+            <img src={payrollLogo} className="card-img-top" alt="..."></img>
+            <h1 style={styleCardWords}> View Payroll </h1>
         </div>
     )
-}
-const ViewPayroll = () => { 
-    return (
-        <div className="card m-2 col-4" style={{width: '20em', height: '25em'}}>
-            <img src={money} className="card-img-top" alt="..."></img>
-            <div className="card-body mt-2 mx-auto">
-                
-                <div className="document"></div>
-                <Link to ="/payroll" ><a href="#" className="btn btn-lg homebtn" >View Payroll</a></Link>
-            </div>
-        </div>
-    )
-    
+   
 }
 const ViewEmployee = () => {
+    const handleButtonClick = () => {
+        window.location.href = '/employee';
+      };
     return (
-        <div className="card m-2 col-4 " style={{width: '20em', height: '25em'}}>
-            <img src={employee} className="card-img-top" alt="..."></img>
-            <div className="card-body mt-2 mx-auto">
-                
-                <div className="person"></div>
-                <Link to ="/employee" ><a href="#" className="btn btn-lg homebtn">View Employee</a></Link>
-            </div>
+        <div className="card m-2 col-4" style={{ width: '20em', height: '25em' } } onClick={handleButtonClick}>
+            <img src={employeeLogo} className="card-img-top" alt="..."></img>
+            <h1 style={styleCardWords}> View Employees </h1>
         </div>
     )
-    
+   
 }
 
 
@@ -54,6 +69,7 @@ class Home extends Component{
            
             <EnterTime />
             <ViewPayroll/>
+            {/* <EnterTime /> */}
             <ViewEmployee />
 
         </div>
