@@ -1,12 +1,19 @@
-
+.loginbg {
+  background: url('../pictures/boston_bg2_jpeg.webp'); 
+  /* background: url('../pictures/DuckCreekBacking.jpg'); */
+  background-size: cover;
+  animation: gradient 15s ease infinite;
+  height:100vh;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 100%;
+}
 .login_wrapper {
-  
   width: 100%;
   display: flex;
   overflow: hidden;
   align-items: center;
   justify-content: center;
- 
 
 } 
 
@@ -32,7 +39,7 @@
 
 
 
-.login_wrapper::before{
+/*.login_wrapper::before{
   content: "";
   background: url('../pictures/boston_bg2_jpeg.webp');
   background-size: cover;
@@ -43,7 +50,7 @@
   left: 0px;
   opacity: 0.75;
 
-}
+}*/
 
 
 .loginFlexbox {

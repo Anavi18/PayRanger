@@ -15,17 +15,15 @@ import { useContext } from 'react';
 function Body() {
   let dropdownPair = useContext(DropdownContext);
   return (
-    <div className="imgShadow" onClick={()=>dropdownPair.toggleDropdown(current => false)}>
-              <div className="App">
-                <Header/>
-                <Routes>
-                  <Route path="/" element={<LogIn/>}/>
-                  <Route path="/home" element={<Home/>}/>
-                  <Route path="/enter-time" element={<EnterTime/>}/>
-                  <Route path="/payroll" element={<ViewPayroll/>}/>
-                  <Route path="/employee" element={<ViewEmployees/>}/>
-                </Routes>
-              </div>
+      <div className="App">
+        <Header/>
+        <Routes>
+          <Route path="/" element={<LogIn/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/enter-time" element={<EnterTime/>}/>
+          <Route path="/payroll" element={<ViewPayroll/>}/>
+          <Route path="/employee" element={<ViewEmployees/>}/>
+        </Routes>
       </div>
   );
 }

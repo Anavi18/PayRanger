@@ -3,6 +3,7 @@ import "./LogIn.css";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../../LoginContext";
+import Header from "../Header/Header";
 
 
 function ForgotPassword() {
@@ -28,6 +29,7 @@ export default function LogIn() {
     };
   
     return (
+      <div className="loginbg">
       <div className="login_wrapper">
             <div className="loginFlexbox justify-content-center align-items-center ">
               <h1>Login</h1>
@@ -58,5 +60,6 @@ export default function LogIn() {
           
         
       </div>
+      </div>  
     );
   }
