@@ -78,10 +78,10 @@ app.post("/getHoursWorked", async (req, res) => {
 
         let numHours = 0;
         let timeEntries = data.timeEntries
+        console.log(timeEntries)
         for (let x = 0; x < timeEntries.length; x++){
 
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
-                console.log("here")
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
         }
@@ -91,6 +91,43 @@ app.post("/getHoursWorked", async (req, res) => {
         res.json(error)
     }
 });
+
+app.patch("/submitTime", async (req, res) => {
+	try {
+        id = req.body.employeeId
+        date = req.body.date
+        hoursWorked = req.body.hoursWorked
+        
+        year = parseInt(date.slice(0, 4))
+        month = parseInt(date.slice(5,7))
+        day = parseInt(date.slice(8, 10))
+
+        newDate = new Date(year,month-1,day,-5,0,0,0)
+    
+		data = await timeEntryModel.findOne({ employeeId: id});
+        let timeEntries = data.timeEntries 
+        
+        let flag = false;
+        for (let x = 0; x < timeEntries.length; x++){
+            if((timeEntries[x].date.valueOf() == newDate.valueOf())){
+                console.log("these dates already exist")
+                flag = true;
+            }
+        }
+        
+        if(flag == false){
+            let toAdd = {"date": newDate, "hoursWorked": hoursWorked}
+            timeEntries.push(toAdd)
+        }
+		
+
+		await data.save()
+		res.send(data)
+	} catch {
+		res.status(404)
+		res.send({ error: "Post doesn't exist!" })
+	}
+})
 
 const port = process.env.PORT || 8082;
 
