@@ -11,12 +11,14 @@ mongoose.connect("mongodb+srv://hypertech-dev:hUhvoyV8K9RiBG0V@hypertech.zpsrnzp
 const employeeModel = require("./models/employees")
 const timeEntryModel = require("./models/time-entries")
 
-app.get("/getEmployees", async (req, res) => {
+app.post("/getEmployees", async (req, res) => {
     try{
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
         if(employee.isManager){
             data = await employeeModel.find({managerId: employee.employeeId});
-            res.json(data)
+            let array = []
+            data.forEach((x)=>array.push({"firstName":x.firstName, "lastName":x.lastName, "employeeId": x.employeeId}))
+            res.json(array)
         }
         else {
             res.json({})
