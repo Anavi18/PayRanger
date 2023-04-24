@@ -40,11 +40,12 @@ app.get("/getEmployee", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try{
+	
         username = req.body.email
         pwd = req.body.password
 
         user = await employeeModel.findOne({ email: username});
-
+	
         if (user.password == pwd){
             id = user.employeeId
             res.json({"response": "OK", "employeeId":id})
@@ -53,7 +54,7 @@ app.post("/login", async (req, res) => {
             res.json({"response": "not OK, password is incorrect"})
         }   
     }catch(error){
-        res.json(error)
+	res.json({"response": "not OK, user does not exist"})
     }
 });
 
@@ -75,7 +76,7 @@ app.post("/getHoursWorked", async (req, res) => {
         console.log(endDate)
 
         data = await timeEntryModel.findOne({ employeeId: id});
-
+	
         let numHours = 0;
         let timeEntries = data.timeEntries
         console.log(timeEntries)
@@ -88,6 +89,7 @@ app.post("/getHoursWorked", async (req, res) => {
 
         res.json({"response":"OK", "numHours": numHours})
     }catch(error){
+	console.log("Here with error", error)
         res.json(error)
     }
 });
