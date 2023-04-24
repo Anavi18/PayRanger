@@ -22,7 +22,7 @@ function Header() {
       return(
         <div className={dropdownPair.dropdown ? "profileDropdown" : "profileDropdownHidden"}>
           <div>
-            <Link to="/">Logged Out</Link>
+            <Link to="/" onClick={toggleDropdownOff}>Logged Out</Link>
           </div>
         </div>
       )
@@ -30,19 +30,19 @@ function Header() {
     const DropdownLoggedIn = () => {
       return(<div className={dropdownPair.dropdown ? "profileDropdown" : "profileDropdownHidden"}>
           <div>
-            <Link to="/" onClick={() => {loginPair.setIsLoggedIn(current => !current)}}>Log Out</Link>
+            <Link to="/home" onClick={toggleDropdownOff}>My Dashboard</Link>
           </div>
           <div>
-            <Link to="/enter-time">Enter Time</Link>
+            <Link to="/enter-time" onClick={toggleDropdownOff}>Enter Time</Link>
           </div>
           <div>
-            <Link to="/payroll">View Payroll</Link>
+            <Link to="/payroll" onClick={toggleDropdownOff}>View Payroll</Link>
           </div>
           <div>
-            <Link to="/employee">View Employee</Link>
+            <Link to="/employee" onClick={toggleDropdownOff}>View Employee</Link>
           </div>
           <div>
-            <Link to="/home">My Dashboard</Link>
+            <Link to="/" onClick={() => {loginPair.setIsLoggedIn(current => !current); toggleDropdownOff();}}>Log Out</Link>
           </div>
         </div>);
     }
