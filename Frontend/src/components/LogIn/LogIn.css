@@ -1,0 +1,132 @@
+.loginbg {
+  background: url('../pictures/boston_bg2_jpeg.webp'); 
+  /* background: url('../pictures/DuckCreekBacking.jpg'); */
+  background-size: cover;
+  animation: gradient 15s ease infinite;
+  height:100vh;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  width: 100%;
+}
+.login_wrapper {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+
+} 
+
+.loginFlexbox .ip input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0 35px 0 5px;
+}
+
+.loginFlexbox .ip{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px  solid #162938;
+  margin: 30px 0;
+  padding: 2px;;
+  
+  
+}
+
+
+
+/*.login_wrapper::before{
+  content: "";
+  background: url('../pictures/boston_bg2_jpeg.webp');
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+
+}*/
+
+
+.loginFlexbox {
+  gap: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 460px;
+  border: 2px solid rgba(255,255,255, .5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+  padding: 2rem;
+
+  
+}
+
+.loginFlexbox h1{
+  font-size: 2em;
+  text-align: center;
+  color: #162938;
+
+
+}
+
+
+.loginFlexbox .loginButton{
+  width: 100%;
+  height: 50px;
+  background: #162938;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: #d2691e;
+  font-weight: 500;
+
+  
+
+}
+
+.loginButton:hover{
+  color:  #162938;
+  background: chocolate;
+
+}
+
+
+.forgotpw{
+  color: antiquewhite;
+  position: relative;
+  left: 35%;
+  
+
+}
+
+.forgotpw:hover{
+  color: #162938;
+}
+
+.wait {
+  animation: waitUntilRoom 1s;
+  position: relative;
+  color: antiquewhite;
+  font-size: 15px;
+  left: 5%;
+
+}
+@keyframes waitUntilRoom {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
