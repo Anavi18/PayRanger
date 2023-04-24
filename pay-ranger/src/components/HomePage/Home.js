@@ -9,7 +9,7 @@ import employeeLogo from "../pictures/employeeLogo.png"
 import payrollLogo from "../pictures/payrollLogoGreen.png"
 
 const styleCardWords = {
-    fontSize: '2.2rem',
+    fontSize: '2rem',
     fontWeight: 'bold',
     margin: '0',
     marginTop: '4rem',
