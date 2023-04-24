@@ -53,7 +53,7 @@ app.post("/login", async (req, res) => {
             res.json({"response": "not OK, password is incorrect"})
         }   
     }catch(error){
-        res.json(error)
+        res.json(error) 
     }
 });
 
