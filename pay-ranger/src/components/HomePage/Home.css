@@ -15,11 +15,19 @@
     padding-top: 1.3rem;
     padding-left: 2.3rem;
     transition: ease-out 0.5s;
-    height: 55%;
-    width: 80%;
-    margin-left: 5%;
-    margin-top: 5%;
+    height: 50%;
+    width: 82%;
+    margin-left: 3%;
+    margin-top: 15%;
 
+}
+
+.cit-employee{
+    margin-top: 19%;
+    margin-bottom: 2.5%;
+    margin-left: 0%;
+    height: 46%;
+    width: 90%;
 }
 
 .card h1 {
