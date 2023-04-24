@@ -14,15 +14,12 @@ const timeEntryModel = require("./models/time-entries")
 app.post("/getEmployees", async (req, res) => {
     try{
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
+        let array = []
         if(employee.isManager){
             data = await employeeModel.find({managerId: employee.employeeId});
-            let array = []
-            data.forEach((x)=>array.push({"firstName":x.firstName, "lastName":x.lastName, "employeeId": x.employeeId}))
-            res.json(array)
+            data.forEach((x)=>array.push({"firstName":x.firstName, "lastName":x.lastName, "employeeId": x.employeeId, "companyId": x.companyId}))
         }
-        else {
-            res.json([])
-        }
+        res.json(array)
     }catch(error){
         res.json(error)
     }
