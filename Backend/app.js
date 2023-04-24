@@ -21,7 +21,7 @@ app.post("/getEmployees", async (req, res) => {
             res.json(array)
         }
         else {
-            res.json({})
+            res.json([])
         }
     }catch(error){
         res.json(error)
@@ -46,11 +46,16 @@ app.post("/login", async (req, res) => {
         user = await employeeModel.findOne({ email: username});
 
         if (user.password == pwd){
-            id = user.employeeId
-            res.json({"response": "OK", "employeeId":id})
+            res.json({"response": 200, 
+            "employeeId":user.employeeId, 
+            "companyId": user.companyId, 
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "isManager": user.isManager
+        })
         }
         else{
-            res.json({"response": "not OK, password is incorrect"})
+            res.json({"response": 401})
         }   
     }catch(error){
         res.json(error) 
