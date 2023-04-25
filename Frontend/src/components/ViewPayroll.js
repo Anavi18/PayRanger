@@ -42,8 +42,6 @@ export default function ViewPayroll() {
     
         event.preventDefault()
         setClicked(true)
-        setWage( Math.floor(Math.random() * 4000) + 500)
-        setHour( Math.floor(Math.random() * 4000) + 40) 
         fetch("http://localhost:8082/getHoursWorked", {
             method: "POST",
             body: JSON.stringify({
@@ -54,7 +52,16 @@ export default function ViewPayroll() {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        }).then( (response) => response.json() ).then(json => setHour(json.numHours));
+        }).then( (response) => response.json() ).then(json => {
+            if(JSON.stringify(json) == "{}") {
+                console.log("Here")
+                setHour(0);
+                setWage(0);
+                return;
+            }
+            setHour(json.numHours);
+            setWage( json.numHours * Math.floor(Math.random() * 40))
+        });
     }
 
     
