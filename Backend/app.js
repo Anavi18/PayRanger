@@ -59,6 +59,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
+        console.log(req.body)
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate
@@ -95,6 +96,7 @@ app.post("/getHoursWorked", async (req, res) => {
         sal = sal * numHours
         res.json({"response":"OK", "numHours": numHours,"Salary":sal})
     }catch(error){
+        console.log(error)
         res.json(error)
     }
 });

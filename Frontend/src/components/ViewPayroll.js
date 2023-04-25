@@ -3,7 +3,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
+import dayjs, {Dayjs} from "dayjs";
 
 
 function Wage({wage, hour}) {
@@ -33,17 +33,34 @@ export default function ViewPayroll() {
     const [isClicked, setClicked] = React.useState(false);
     const [wage, setWage] = React.useState(0)
     const [hour, setHour] = React.useState(0)
-
-    
-
-    
-
+    const [start, setStart] = React.useState(null)
+    const [end, setEnd] = React.useState(null)
     const handleSubmit = (event) => {
-       
+        const id = 1; // This should be parameterized using a context in the future
         event.preventDefault()
         setClicked(true)
-        setWage( Math.floor(Math.random() * 4000) + 500)
-        setHour( Math.floor(Math.random() * 4000) + 40)
+        const startUsed = start != null ? start.format('YYYY-MM-DD') : "01-01-1970";
+        const endUsed = end != null ? end.format('YYYY-MM-DD') : "01-01-1970";
+        console.log(startUsed);
+        fetch("http://localhost:8082/getHoursWorked", {
+            method: "POST",
+            body: JSON.stringify({
+                "employeeId": id,
+                "startDate": startUsed,
+                "endDate": endUsed
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then( (response) => response.json() ).then(json => {
+            if(JSON.stringify(json) == "{}") {
+                setHour(0);
+                setWage(0);
+                return;
+            }
+            setHour(json.numHours);
+            setWage( json.numHours * Math.floor(Math.random() * 40))
+        });
     }
 
     
@@ -58,8 +75,15 @@ export default function ViewPayroll() {
                     
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Stack spacing={3}>
-                    <DatePicker label = "FROM" />
-                    <DatePicker label = "TO"/>
+                    <DatePicker
+                    label="FROM"
+                    value={start}
+                    onChange={(newValue) => setStart(newValue)}
+                    />
+                    <DatePicker label = "TO"
+                    value={end} 
+                    onChange={(newValue) => setEnd(newValue)} 
+                    />
                     
                     </Stack>
                     <div className="btn mt-4 enter-btn " onClick={handleSubmit} >View</div>
