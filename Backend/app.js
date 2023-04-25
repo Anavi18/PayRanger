@@ -69,11 +69,16 @@ app.post("/getHoursWorked", async (req, res) => {
         eyear = parseInt(end.slice(0, 4))
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
+	    
+	if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
+            startDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
+            endDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+        }
+        else{
+            startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+            endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
+        }
 
-        startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
-        endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-        // console.log(startDate)
-        // console.log(endDate)
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
         sal = parseFloat(user.salary)
