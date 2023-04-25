@@ -39,14 +39,22 @@ export default function ViewPayroll() {
     
 
     const handleSubmit = (event) => {
-       
+    
         event.preventDefault()
         setClicked(true)
         setWage( Math.floor(Math.random() * 4000) + 500)
         setHour( Math.floor(Math.random() * 4000) + 40) 
-        const request = new Request("http://localhost:8082")
-        fetch(request).then( (response) => response.blob() ).then(blob => blob.text()).then(text => console.log(text));
-        console.log("Making request");
+        fetch("http://localhost:8082/getHoursWorked", {
+            method: "POST",
+            body: JSON.stringify({
+                "employeeId": 1,
+                "startDate": "2023-01-27",
+                "endDate": "2023-02-30"
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then( (response) => response.json() ).then(json => setHour(json.numHours));
     }
 
     

@@ -59,6 +59,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
+        console.log(req.body)
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate
@@ -73,7 +74,6 @@ app.post("/getHoursWorked", async (req, res) => {
         endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
         // console.log(startDate)
         // console.log(endDate)
-
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
         sal = parseFloat(user.salary)
@@ -91,6 +91,7 @@ app.post("/getHoursWorked", async (req, res) => {
         sal = sal * numHours
         res.json({"response":"OK", "numHours": numHours,"Salary":sal})
     }catch(error){
+        console.log(error)
         res.json(error)
     }
 });
