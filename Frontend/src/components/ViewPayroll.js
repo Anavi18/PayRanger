@@ -39,13 +39,13 @@ export default function ViewPayroll() {
     
 
     const handleSubmit = (event) => {
-    
+        let id = 1; // This should be parameterized using a context in the future
         event.preventDefault()
         setClicked(true)
         fetch("http://localhost:8082/getHoursWorked", {
             method: "POST",
             body: JSON.stringify({
-                "employeeId": 1,
+                "employeeId": id,
                 "startDate": "2023-01-27",
                 "endDate": "2023-02-30"
             }),
@@ -54,7 +54,6 @@ export default function ViewPayroll() {
             }
         }).then( (response) => response.json() ).then(json => {
             if(JSON.stringify(json) == "{}") {
-                console.log("Here")
                 setHour(0);
                 setWage(0);
                 return;
