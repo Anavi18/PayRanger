@@ -43,7 +43,10 @@ export default function ViewPayroll() {
         event.preventDefault()
         setClicked(true)
         setWage( Math.floor(Math.random() * 4000) + 500)
-        setHour( Math.floor(Math.random() * 4000) + 40)
+        setHour( Math.floor(Math.random() * 4000) + 40) 
+        const request = new Request("http://localhost:8082")
+        fetch(request).then( (response) => response.blob() ).then(blob => blob.text()).then(text => console.log(text));
+        console.log("Making request");
     }
 
     
