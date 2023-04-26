@@ -73,22 +73,25 @@ app.post("/getHoursWorked", async (req, res) => {
 
         startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
         endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-        console.log(startDate)
-        console.log(endDate)
+        // console.log(startDate)
+        // console.log(endDate)
 
         data = await timeEntryModel.findOne({ employeeId: id});
+        user = await employeeModel.findOne({employeeId: id});
+        sal = parseFloat(user.salary)
 
         let numHours = 0;
         let timeEntries = data.timeEntries
-        console.log(timeEntries)
+        // console.log(timeEntries)
+        // console.log("Salary: "+sal)
         for (let x = 0; x < timeEntries.length; x++){
 
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
         }
-
-        res.json({"response":"OK", "numHours": numHours})
+        sal = sal * numHours
+        res.json({"response":200, "numHours": numHours,"Salary":sal})
     }catch(error){
         res.json(error)
     }
