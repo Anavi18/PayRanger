@@ -19,9 +19,9 @@ app.post("/getEmployees", async (req, res) => {
             data = await employeeModel.find({managerId: employee.employeeId});
             data.forEach((x)=>array.push({"firstName":x.firstName, "lastName":x.lastName, "employeeId": x.employeeId, "companyId": x.companyId}))
         }
-        res.json(array)
+        res.status(200).json(array)
     }catch(error){
-        res.json(error)
+        res.status(400).json(error)
     }
 });
 
@@ -42,8 +42,8 @@ app.post("/login", async (req, res) => {
 
         user = await employeeModel.findOne({ email: username});
 
-        if (user.password == pwd){
-            res.json({"response": 200, 
+        if (user != null && user.password == pwd){
+            res.status(200).json({ 
             "employeeId":user.employeeId, 
             "companyId": user.companyId, 
             "firstName": user.firstName,
@@ -52,10 +52,10 @@ app.post("/login", async (req, res) => {
         })
         }
         else{
-            res.json({"response": 401})
+            res.status(401).json({})
         }   
     }catch(error){
-        res.json(error) 
+        res.status(400).json(error) 
     }
 });
 
