@@ -55,6 +55,8 @@ const ViewEmployee = () => {
    
 }
 
+function Home(props){
+
   return (
     
         <div className="homebg ">
@@ -67,6 +69,10 @@ const ViewEmployee = () => {
         
 
   );
+
+  }
+
+
 
 
 export default Home;
