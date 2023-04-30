@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./LogIn.css";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import { useContext } from "react";
-import { LoginContext } from "../../LoginContext";
+import { BrowserRouter, Route, Link, Navigate } from "react-router-dom";
 import Header from "../Header/Header";
+import Home from "../HomePage/Home"
+import { useNavigate } from "react-router-dom";
+
 
 
 function ForgotPassword() {
@@ -11,11 +12,16 @@ function ForgotPassword() {
     <div className="wait ">Please contact admin at payranger@duckcreek.com!</div>
   )
 }
-export default function LogIn() {
-    let [username, setUsername] = useState("");
-    let [password, setPassword] = useState("");
-    let [forgotPassword, showForgotPassword] = useState(false);
-    let loginPair = useContext(LoginContext);
+
+export default function LogIn(props) {
+   
+    const {handleLogin, email, password, setUsername, setPassword} = props
+   
+    const [forgotPassword, showForgotPassword] = useState(false);
+    // let loginPair = useContext(LoginContext);
+
+
+   
     const onUsernameChange = (event) => {
       setUsername(event.target.value);
     };
@@ -49,7 +55,7 @@ export default function LogIn() {
                 />
               </div>
             
-              <Link to="/home"><button className="loginButton"  onClick={()=>{loginPair.setIsLoggedIn(current=>!current)}}>Login</button></Link>
+              <button className="loginButton"  onClick={handleLogin}>Login</button>
            
               <div className="mt-4 ">
                 <a href="#" class= "forgotpw" onClick={onForgotPasswordClick}>Forgot password?</a>

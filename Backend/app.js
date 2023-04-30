@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 var cors = require('cors')
 
+
 app.use(express.json())
 app.use(cors())
 
@@ -44,13 +45,20 @@ app.post("/login", async (req, res) => {
         pwd = req.body.password
 
         user = await employeeModel.findOne({ email: username});
-
-        if (user.password == pwd){
-            id = user.employeeId
-            res.json({"response": "OK", "employeeId":id})
+        
+        if (user && user.password == pwd){
+            res.status(200);
+            res.json({
+            "response": "Successfully logged in!", 
+            "email": user.email, 
+            "firstName": user.firstName, 
+            "lastName": user.lastName,
+            "employeeId":user.employeeId, 
+            "auth": true})
         }
         else{
-            res.json({"response": "not OK, password is incorrect"})
+            res.status(401);
+            res.json({"response": "not OK, password is incorrect", "auth": false})
         }   
     }catch(error){
         res.json(error)
