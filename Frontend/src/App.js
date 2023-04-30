@@ -35,7 +35,7 @@ function Body() {
     });
     const user = await response.json();
     if (response.ok) {
-      console.log(user.email)
+    
       setLogInUser(user)
       navigate("/Home")
      
