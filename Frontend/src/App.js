@@ -20,7 +20,7 @@ function Body() {
   const [password, setPassword] = useState("");
 
   let dropdownPair = useContext(DropdownContext);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logInUser, setLogInUser] = useState(null);
 
 
@@ -37,6 +37,7 @@ function Body() {
     if (response.ok) {
     
       setLogInUser(user)
+      setIsLoggedIn(true)
       navigate("/Home")
      
       // set user context to authenticated
@@ -49,13 +50,13 @@ function Body() {
 
   return (
       <div className="App">
-        <Header user = {logInUser}/>
+        <Header user = {logInUser} isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
         <Routes>
           <Route path="/" element={<LogIn handleLogin = {handleLogin} email = {username} password = {password} setUsername = {setUsername} setPassword = {setPassword} />}/>
           <Route path="/home" element={<Home user = {logInUser}/>}/>
-          <Route path="/enter-time" element={<EnterTime/>}/>
-          <Route path="/payroll" element={<ViewPayroll/>}/>
-          <Route path="/employee" element={<ViewEmployees/>}/>
+          <Route path="/enter-time" element={<EnterTime user = {logInUser}/>}/>
+          <Route path="/payroll" element={<ViewPayroll  user = {logInUser}/>}/>
+          <Route path="/employee" element={<ViewEmployees  user = {logInUser}/>}/>
         </Routes>
       </div>
   );

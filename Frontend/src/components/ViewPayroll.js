@@ -28,13 +28,13 @@ function Wage({wage, hour}) {
 
 
 
-export default function ViewPayroll() {
+export default function ViewPayroll(props) {
 
     const [isClicked, setClicked] = React.useState(false);
     const [wage, setWage] = React.useState(0)
     const [hour, setHour] = React.useState(0)
 
-    
+    const {user} = props
 
     
 
