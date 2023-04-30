@@ -41,6 +41,7 @@
     border-color: grey;
     border-width: 1px;
     border-bottom-left-radius: 5px;
+    z-index: 1;
 }
 .profileDropdown div {
     padding: 25px;

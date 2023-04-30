@@ -33,6 +33,10 @@
     
 }
 
+.list-group-item:hover{
+    cursor: pointer;
+}
+
 .list-group-item:last-child{
     border-bottom: none;
 }
@@ -246,7 +250,13 @@
     width: max-content;
     
 }
+.count-btn:hover{
+    /* background: #E6986B;
+    color: #162938; */
+    background: rgb(36, 52, 116);
+    color: #ffffff;
 
+}
 
 
 
