@@ -15,27 +15,14 @@ const timeEntryModel = require("./models/time-entries")
 app.post("/getEmployees", async (req, res) => {
     try{
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
+        let array = []
         if(employee.isManager){
             data = await employeeModel.find({managerId: employee.employeeId});
-            let array = []
-            data.forEach((x)=>array.push({"firstName":x.firstName, "lastName":x.lastName, "employeeId": x.employeeId}))
-            res.json(array)
+            data.forEach((x)=>array.push({"firstName":x.firstName, "lastName":x.lastName, "employeeId": x.employeeId, "companyId": x.companyId}))
         }
-        else {
-            res.json({})
-        }
+        res.status(200).json(array)
     }catch(error){
-        res.json(error)
-    }
-});
-
-app.get("/getEmployee", async (req, res) => {
-    try{
-        id = req.body.employeeId
-        data = await employeeModel.find({ employeeId: id});
-        res.json(data)
-    }catch(error){
-        res.json(error)
+        res.status(400).json(error)
     }
 });
 
@@ -46,17 +33,22 @@ app.post("/login", async (req, res) => {
         pwd = req.body.password
 
         user = await employeeModel.findOne({ email: username});
-	
-        if (user.password == pwd){
-            id = user.employeeId
-            res.json({"response": "OK", "employeeId":id})
+
+        if (user != null && user.password == pwd){
+            res.status(200).json({ 
+            "employeeId":user.employeeId, 
+            "companyId": user.companyId, 
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "isManager": user.isManager
+            })
         }
         else{
-            res.status(401);
-            res.json({"response": "not OK, password is incorrect", "auth": false})
+            res.status(401).json({})
         }   
     }catch(error){
-	res.json({"response": "not OK, user does not exist"})
+        res.status(400).json(error) 
+
     }
 });
 
@@ -73,35 +65,33 @@ app.post("/getHoursWorked", async (req, res) => {
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
 
-	if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
-            startDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-            endDate = new Date(syear,smonth-1,sday,-5,0,0,0)
-        }
-        else{
-            startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
-            endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-        }
+	    
+        startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+        endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
 
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
-        
         sal = parseFloat(user.salary)
-
         let numHours = 0;
         let timeEntries = data.timeEntries
-    
-        for (let x = 0; x < timeEntries.length; x++){
 
+        for (let x = 0; x < timeEntries.length; x++){
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
+
+        }   
+        earned = sal * numHours
+
+        if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
+            res.status(401).json({})
         }
-        res.status(200)
-        sal = sal * numHours
-        res.json({"response":"OK", "numHours": numHours,"Salary":sal})
+        else{
+            res.status(200).json({"numHours": numHours, "earned": earned})
+        }
     }catch(error){
-	      console.log("Here with error", error)
-        res.json(error)
+        res.status(400).json(error)
+
     }
 });
 
