@@ -47,7 +47,7 @@ app.post("/login", async (req, res) => {
 
         user = await employeeModel.findOne({ email: username});
 	
-        if (user.password == pwd){
+        if ( user.password == pwd){
             id = user.employeeId
             res.json({"response": "OK", "employeeId":id})
         }
