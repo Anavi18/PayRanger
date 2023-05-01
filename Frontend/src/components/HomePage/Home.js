@@ -1,12 +1,13 @@
-import React, {Component} from "react";
-import {Link} from 'react-router-dom';
+import React, { Component, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
-import clock from "../pictures/clock.jpeg"
-import money from "../pictures/money.jpeg"
-import employee from "../pictures/employee.jpeg"
-import enterTimeSymbol from "../pictures/timeClock.png"
-import employeeLogo from "../pictures/employeeLogo.png"
-import payrollLogo from "../pictures/payrollLogoGreen.png"
+import clock from "../pictures/clock.jpeg";
+import money from "../pictures/money.jpeg";
+import employee from "../pictures/employee.jpeg";
+import enterTimeSymbol from "../pictures/timeClock.png";
+import employeeLogo from "../pictures/employeeLogo.png";
+import payrollLogo from "../pictures/payrollLogoGreen.png";
+import Cookies from "js-cookie";
 
 const styleCardWords = {
     fontSize: '2rem',
@@ -18,7 +19,6 @@ const styleCardWords = {
     textTransform: 'uppercase',
     color: 'black',
 };
-
 
 const EnterTime = () => {
 
@@ -56,27 +56,26 @@ const ViewEmployee = () => {
    
 }
 
+function Home(props){
+  const {user, setUser} = props
 
-class Home extends Component{
-    render() {
-        return (
+
+  return (
+    
         <div className="homebg ">
+            <div className=" container d-flex align-items-center">
+                <EnterTime />
+                <ViewPayroll />
+                <ViewEmployee />
+            </div>
+            </div>
         
 
-        <div className=" container d-flex align-items-center">
-           
-            <EnterTime />
-            <ViewPayroll/>
-            {/* <EnterTime /> */}
-            <ViewEmployee />
+  );
 
-        </div>
+  }
 
-        </div>
-        
-	    
-        )
-    }
-}
+
+
 
 export default Home;

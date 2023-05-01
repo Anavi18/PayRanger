@@ -28,41 +28,40 @@ function Wage({wage, hour}) {
 
 
 
-export default function ViewPayroll() {
+export default function ViewPayroll(props) {
 
     const [isClicked, setClicked] = React.useState(false);
     const [wage, setWage] = React.useState(0)
     const [hour, setHour] = React.useState(0)
     const [start, setStart] = React.useState(null)
     const [end, setEnd] = React.useState(null)
-    const handleSubmit = (event) => {
-        const id = 1; // This should be parameterized using a context in the future
-        event.preventDefault()
+
+    const {user} = props
+
+    const handleViewPayroll = async () => {
+       
         setClicked(true)
-        const startUsed = start != null ? start.format('YYYY-MM-DD') : "01-01-1970";
-        const endUsed = end != null ? end.format('YYYY-MM-DD') : "01-01-1970";
-        console.log(startUsed);
-        fetch("http://localhost:8082/getHoursWorked", {
-            method: "POST",
-            body: JSON.stringify({
-                "employeeId": id,
-                "startDate": startUsed,
-                "endDate": endUsed
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        }).then( (response) => response.json() ).then(json => {
-            if(JSON.stringify(json) == "{}") {
+        const response = await fetch("http://localhost:8082/getHoursWorked", {
+          method: 'POST',
+          body: JSON.stringify({ employeeId: user.employeeId, startDate: start, endDate: end }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then( (response) => response.json() ).then(res => {
+            if(JSON.stringify(res) == "{}") {
                 setHour(0);
                 setWage(0);
                 return;
             }
-            setHour(json.numHours);
-            setWage( json.numHours * Math.floor(Math.random() * 40))
+            setHour(res.numHours);
+        
+            setWage( (res.Salary).toFixed(2))
+    
         });
-    }
+        
+      }
 
+    
     
     return (
         <div className="homebg">
@@ -75,18 +74,19 @@ export default function ViewPayroll() {
                     
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Stack spacing={3}>
-                    <DatePicker
-                    label="FROM"
+                    <DatePicker 
+                    label = "FROM" 
                     value={start}
                     onChange={(newValue) => setStart(newValue)}
                     />
-                    <DatePicker label = "TO"
+                    <DatePicker 
+                    label = "TO"
                     value={end} 
                     onChange={(newValue) => setEnd(newValue)} 
                     />
                     
                     </Stack>
-                    <div className="btn mt-4 enter-btn " onClick={handleSubmit} >View</div>
+                    <div className="btn mt-4 enter-btn " onClick={handleViewPayroll} >View</div>
                     <div className="mt-4">{isClicked && <Wage wage={wage} hour = {hour}/>}</div>
 
                     </LocalizationProvider>

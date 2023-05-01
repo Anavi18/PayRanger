@@ -44,6 +44,11 @@ const EmployeeSchema = new mongoose.Schema({
   password:{
     type: String,
     required: true
+  },
+  salary:{
+    type:Number,
+    required: true
+
   }
 });
 
