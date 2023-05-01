@@ -13,6 +13,7 @@ import {LoginProvider} from '../src/components/LogIn/LoginContext';
 import { DropdownContext, DropdownProvider } from './DropdownContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function Body() {
   const navigate = useNavigate();
@@ -21,13 +22,25 @@ function Body() {
 
   let dropdownPair = useContext(DropdownContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [logInUser, setLogInUser] = useState(null);
- 
+  const [logInUser, setLogInUser] = useState({});
+
+  useEffect(() => {
+    const isLoggedInCookie = Cookies.get('isLoggedIn');
+    if (isLoggedInCookie === 'true') {
+      setIsLoggedIn(true);
+    }
+    else {
+      Cookies.remove("userLoggedIn")
+      Cookies.remove("isLoggedIn")
+      setIsLoggedIn(false)
+    }
+  }, []);
+
 
 
 
   const handleLogin =  async () => {
-    
+ 
     const response = await fetch("http://localhost:8082/login", {
       method: 'POST',
       body: JSON.stringify({ email: username, password: password }),
@@ -37,10 +50,14 @@ function Body() {
     });
     const user = await response.json();
     if (response.ok) {
-    
+      setIsLoggedIn(true);
+      Cookies.set("isLoggedIn", "true");
+
       setLogInUser(user)
-      setIsLoggedIn(true)
+     
+      Cookies.set("userLoggedIn", JSON.stringify(user))
       navigate("/Home")
+    
      
       // set user context to authenticated
     } else {
@@ -54,10 +71,10 @@ function Body() {
 
   return (
       <div className="App">
-        <Header user = {logInUser} isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
+        <Header user = {logInUser} setUser = {setLogInUser} isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
         <Routes>
           <Route path="/" element={<LogIn handleLogin = {handleLogin} email = {username} password = {password} setUsername = {setUsername} setPassword = {setPassword} />}/>
-          <Route path="/home" element={<Home user = {logInUser}/>}/>
+          <Route path="/home" element={<Home user = {logInUser} setUser = {setLogInUser}/>}/>
           <Route path="/enter-time" element={<EnterTime user = {logInUser}/>}/>
           <Route path="/payroll" element={<ViewPayroll  user = {logInUser}/>}/>
           <Route path="/employee" element={<ViewEmployees  user = {logInUser}/>}/>

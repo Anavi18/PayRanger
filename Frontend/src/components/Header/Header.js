@@ -1,15 +1,30 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useStat, useEffect} from "react";
 import "./Header.css";
 import logo from "./cropped-duck-creek-favicon-32x32.webp";
 import avatar from "./Icons/avatar.svg";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../LogIn/LoginContext";
 import { DropdownContext } from "../../DropdownContext";
-
+import Cookies from "js-cookie";
 function Header(props) {
    
-    let {user, isLoggedIn, setIsLoggedIn} = props
-
+    const {user, setUser, isLoggedIn, setIsLoggedIn} = props
+ 
+    useEffect(() => {
+      const userCookie = Cookies.get('userLoggedIn');
+      const loginCookie = Cookies.get("isLoggedIn")
+    
+      if (userCookie || loginCookie === "true") {
+      
+        setIsLoggedIn(true)
+        setUser(JSON.parse(userCookie));
+        console.log(user)
+    
+      }
+    }, [setUser, setIsLoggedIn]);
+  
+    console.log(user)
+    
     let dropdownPair = useContext(DropdownContext);
     let loginPair = useContext(LoginContext);
 
@@ -21,7 +36,7 @@ function Header(props) {
     };
 
     const toggleDropdownOff = (event) => {
-      user = null
+    
       console.log("Toggling dropdown off");
       dropdownPair.toggleDropdown(current=>false);
     }
@@ -50,12 +65,13 @@ function Header(props) {
             <Link to="/employee" onClick={toggleDropdownOff}>View Employee</Link>
           </div>
           <div>
-            <Link to="/" onClick={() => {setIsLoggedIn(false); toggleDropdownOff();}}>Log Out</Link>
+            <Link to="/" onClick={() => {setIsLoggedIn(false); Cookies.remove('isLoggedIn'); Cookies.remove('user'); setUser(null); toggleDropdownOff();}}>Log Out</Link>
           </div>
         </div>);
     }
     return (
       <div className="App-header">
+      
         <div className="Logo"> 
           <div className="LogoName"> Duck Creek Technologies</div>
           <div><img src={logo} alt="logo"/></div>
@@ -64,7 +80,7 @@ function Header(props) {
           <div className="Name">{isLoggedIn? user.firstName +" "+ user.lastName : "Not Logged In"}</div>
           <div><a href="#" onClick={toggleDropdown}><img src={avatar} alt="Click here for employee navigation options" className="logo"/></a></div>
         </div>
-        {isLoggedIn ? <DropdownLoggedIn/> : <DropdownLoggedOut/>}
+        {isLoggedIn? <DropdownLoggedIn/> : <DropdownLoggedOut/>}
       </div>
     )
 }

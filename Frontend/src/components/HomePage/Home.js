@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import clock from "../pictures/clock.jpeg";
@@ -7,6 +7,7 @@ import employee from "../pictures/employee.jpeg";
 import enterTimeSymbol from "../pictures/timeClock.png";
 import employeeLogo from "../pictures/employeeLogo.png";
 import payrollLogo from "../pictures/payrollLogoGreen.png";
+import Cookies from "js-cookie";
 
 const styleCardWords = {
     fontSize: '2rem',
@@ -56,6 +57,14 @@ const ViewEmployee = () => {
 }
 
 function Home(props){
+  const {user, setUser} = props
+  useEffect(() => {
+    const userCookie = Cookies.get('userLoggedIn');
+
+    if (userCookie) {
+      setUser(JSON.parse(userCookie));
+    }
+  }, []);
 
   return (
     

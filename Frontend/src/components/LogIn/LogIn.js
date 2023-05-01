@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import "./LogIn.css";
-import { BrowserRouter, Route, Link, Navigate } from "react-router-dom";
-import Header from "../Header/Header";
-import Home from "../HomePage/Home"
-import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+
 
 
 
@@ -14,11 +12,16 @@ function ForgotPassword() {
 }
 
 export default function LogIn(props) {
+
+    Cookies.remove("isLoggedIn")
+    Cookies.remove("userLoggedIn")
    
     const {handleLogin, email, password, setUsername, setPassword} = props
    
     const [forgotPassword, showForgotPassword] = useState(false);
-    // let loginPair = useContext(LoginContext);
+    
+
+
 
 
    

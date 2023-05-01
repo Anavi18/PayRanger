@@ -54,8 +54,8 @@ export default function ViewPayroll(props) {
                 return;
             }
             setHour(res.numHours);
-         
-            setWage( (res.numHours * res.Salary).toFixed(2))
+        
+            setWage( (res.Salary).toFixed(2))
     
         });
         
