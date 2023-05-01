@@ -60,6 +60,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
+        console.log(req.body)
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate
@@ -69,11 +70,15 @@ app.post("/getHoursWorked", async (req, res) => {
         eyear = parseInt(end.slice(0, 4))
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
-
-        startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
-        endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-        // console.log(startDate)
-        // console.log(endDate)
+	    
+	if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
+            startDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
+            endDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+        }
+        else{
+            startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+            endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
+        }
 
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
@@ -91,7 +96,7 @@ app.post("/getHoursWorked", async (req, res) => {
         sal = sal * numHours
         res.json({"response":"OK", "numHours": numHours,"Salary":sal})
     }catch(error){
-	console.log("Here with error", error)
+	      console.log("Here with error", error)
         res.json(error)
     }
 });
