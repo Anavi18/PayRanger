@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 var cors = require('cors')
 
+
 app.use(express.json())
 app.use(cors())
 
@@ -27,6 +28,7 @@ app.post("/getEmployees", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try{
+	
         username = req.body.email
         pwd = req.body.password
 
@@ -46,6 +48,7 @@ app.post("/login", async (req, res) => {
         }   
     }catch(error){
         res.status(400).json(error) 
+
     }
 });
 
@@ -61,6 +64,7 @@ app.post("/getHoursWorked", async (req, res) => {
         eyear = parseInt(end.slice(0, 4))
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
+
 	    
         startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
         endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
@@ -70,10 +74,12 @@ app.post("/getHoursWorked", async (req, res) => {
         sal = parseFloat(user.salary)
         let numHours = 0;
         let timeEntries = data.timeEntries
+
         for (let x = 0; x < timeEntries.length; x++){
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
+
         }   
         earned = sal * numHours
 
@@ -85,6 +91,7 @@ app.post("/getHoursWorked", async (req, res) => {
         }
     }catch(error){
         res.status(400).json(error)
+
     }
 });
 
@@ -93,21 +100,24 @@ app.patch("/submitTime", async (req, res) => {
         id = req.body.employeeId
         date = req.body.date
         hoursWorked = req.body.hoursWorked
-        
+ 
         year = parseInt(date.slice(0, 4))
         month = parseInt(date.slice(5,7))
         day = parseInt(date.slice(8, 10))
 
-        newDate = new Date(year,month-1,day,-5,0,0,0)
+  
+        newDate = new Date(year, month - 1, day)
     
 		data = await timeEntryModel.findOne({ employeeId: id});
         let timeEntries = data.timeEntries 
         
         let flag = false;
         for (let x = 0; x < timeEntries.length; x++){
-            if((timeEntries[x].date.valueOf() == newDate.valueOf())){
-                console.log("these dates already exist")
+           
+            if(timeEntries[x].date.getTime() == newDate.getTime()){
+                
                 flag = true;
+                break;
             }
         }
         
@@ -115,11 +125,18 @@ app.patch("/submitTime", async (req, res) => {
             let toAdd = {"date": newDate, "hoursWorked": hoursWorked}
             timeEntries.push(toAdd)
         }
-		
+
 
 		await data.save()
+        if (flag) {
+            res.json({"response": "exist"})
+            return
+        }
+
 		res.send(data)
+        
 	} catch {
+       
 		res.status(404)
 		res.send({ error: "Post doesn't exist!" })
 	}

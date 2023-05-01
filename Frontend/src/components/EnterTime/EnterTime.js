@@ -5,6 +5,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Stack from "@mui/material/Stack";
 import "./entertime.css";
+import { setRef } from "@mui/material";
 
 const totalTime = (from, to) => {
   const timeDiffInMs = to - from;
@@ -15,34 +16,76 @@ const totalTime = (from, to) => {
   return timeDiffInHour.toFixed(2);
 };
 
-function TotalTime({ fromTime, toTime }) {
-  const total = totalTime(fromTime, toTime);
-  if (isNaN(total)) {
+function TotalTime({ timeWorked, exist}) {
+
+  if (isNaN(timeWorked)) {
     return (
       <div  className="text-danger d-flex justify-content-center">
         You need to enter your start and end time!{" "}
       </div>
     );
   }
+  else if (exist){
+    return (
+      <div  className="text-danger d-flex justify-content-center">
+        Working time on this date was already saved!{" "}
+      </div>
+
+    )
+  }
 
   return (
     <div className="d-flex justify-content-center btn btn-success text-dark"> 
       
-        Est. working time: {totalTime(fromTime, toTime)} hour(s)
+        {timeWorked} hour(s) worked is saved!
     
     </div>
   );
 }
 
-export default function EnterTime() {
+export default function EnterTime(props) {
+  const [dateWork, setDateWork] = React.useState(null)
   const [fromTime, setFrom] = React.useState();
   const [toTime, setTo] = React.useState();
-  const [est, setEst] = React.useState(false);
+  const [clicked, setClicked] = React.useState(false);
+  const [time, setTime] = React.useState(0);
+  const [exist, setExist] = React.useState(false);
+  const {user} = props
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setEst(true);
-  };
+
+  const handleTimeSubmit = async () => {
+
+    let timeworked = totalTime(fromTime, toTime)
+    setTime(timeworked);
+    setClicked(true)
+  
+    
+    const response = await fetch("http://localhost:8082/submitTime", {
+      method: 'PATCH',
+      body: JSON.stringify({ employeeId: user.employeeId, date: dateWork, hoursWorked: timeworked }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then( (response) => response.json()).then(res => {
+        if(JSON.stringify(res) == "{}") {
+            return;
+        }
+        if (res.response == "exist"){
+        
+          setExist(true)
+        }
+        else {
+          setExist(false)
+
+        }
+
+
+        
+
+    });
+    
+  }
+
 
   return (
     <div className=" homebg">
@@ -55,23 +98,27 @@ export default function EnterTime() {
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
-              <DatePicker />
+              <DatePicker 
+      
+              value={dateWork}
+              onChange={(newValue) => setDateWork(newValue)}
+              />
               <TimePicker
                 label="FROM"
                 value={fromTime}
-                onChange={(newValue) => setFrom(newValue)}
+                onChange={(newTime) => setFrom(newTime)}
               />
               <TimePicker
                 label="TO"
                 value={toTime}
-                onChange={(newValue) => setTo(newValue)}
+                onChange={(newTime) => setTo(newTime)}
               />
             </Stack>
-            <div className="btn mt-3 enter-btn" onClick={handleSubmit}>
+            <div className="btn mt-3 enter-btn" onClick={handleTimeSubmit}>
               Save
             </div>
             <div className="mt-4  msg">
-              {est && <TotalTime fromTime={fromTime} toTime={toTime} />}
+              {clicked && <TotalTime timeWorked = {time} exist = {exist} />}
             </div>
           </LocalizationProvider>
       </div>
