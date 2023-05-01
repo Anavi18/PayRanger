@@ -79,7 +79,6 @@ app.post("/getHoursWorked", async (req, res) => {
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
-
         }   
         earned = sal * numHours
 
@@ -96,7 +95,7 @@ app.post("/getHoursWorked", async (req, res) => {
 });
 
 app.patch("/submitTime", async (req, res) => {
-	try {
+	try{
         id = req.body.employeeId
         date = req.body.date
         hoursWorked = req.body.hoursWorked
@@ -105,40 +104,35 @@ app.patch("/submitTime", async (req, res) => {
         month = parseInt(date.slice(5,7))
         day = parseInt(date.slice(8, 10))
 
-  
         newDate = new Date(year, month - 1, day)
     
 		data = await timeEntryModel.findOne({ employeeId: id});
         let timeEntries = data.timeEntries 
         
-        let flag = false;
+        let dateExists = false;
         for (let x = 0; x < timeEntries.length; x++){
-           
             if(timeEntries[x].date.getTime() == newDate.getTime()){
-                
-                flag = true;
+                dateExists = true;
                 break;
             }
         }
         
-        if(flag == false){
-            let toAdd = {"date": newDate, "hoursWorked": hoursWorked}
-            timeEntries.push(toAdd)
+        if (dateExists) {
+            res.status(440).json({})
+            return
         }
-
-
-		await data.save()
-        if (flag) {
-            res.json({"response": "exist"})
+        if (new Date(mongoose.now()) < newDate) {
+            res.status(441).json({})
             return
         }
 
-		res.send(data)
-        
-	} catch {
-       
-		res.status(404)
-		res.send({ error: "Post doesn't exist!" })
+        let toAdd = {"date": newDate, "hoursWorked": hoursWorked}
+        timeEntries.push(toAdd)
+		await data.save()
+
+		res.status(200).send({})
+	}catch{
+		res.status(400).send(error)
 	}
 })
 
