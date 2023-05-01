@@ -22,6 +22,8 @@ function Body() {
   let dropdownPair = useContext(DropdownContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logInUser, setLogInUser] = useState(null);
+ 
+
 
 
   const handleLogin =  async () => {
@@ -47,6 +49,8 @@ function Body() {
    
     }
   };
+
+
 
   return (
       <div className="App">
