@@ -58,13 +58,7 @@ const ViewEmployee = () => {
 
 function Home(props){
   const {user, setUser} = props
-  useEffect(() => {
-    const userCookie = Cookies.get('userLoggedIn');
 
-    if (userCookie) {
-      setUser(JSON.parse(userCookie));
-    }
-  }, []);
 
   return (
     

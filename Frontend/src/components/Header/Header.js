@@ -10,20 +10,8 @@ function Header(props) {
    
     const {user, setUser, isLoggedIn, setIsLoggedIn} = props
  
-    useEffect(() => {
-      const userCookie = Cookies.get('userLoggedIn');
-      const loginCookie = Cookies.get("isLoggedIn")
-    
-      if (userCookie || loginCookie === "true") {
-      
-        setIsLoggedIn(true)
-        setUser(JSON.parse(userCookie));
-        console.log(user)
-    
-      }
-    }, [setUser, setIsLoggedIn]);
   
-    console.log(user)
+  
     
     let dropdownPair = useContext(DropdownContext);
     let loginPair = useContext(LoginContext);

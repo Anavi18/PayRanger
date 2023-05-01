@@ -28,11 +28,16 @@ function Body() {
     const isLoggedInCookie = Cookies.get('isLoggedIn');
     if (isLoggedInCookie === 'true') {
       setIsLoggedIn(true);
+      const userLoggedIn = Cookies.get("userLoggedIn");
+      setLogInUser(JSON.parse(userLoggedIn))
+    
     }
+  
     else {
       Cookies.remove("userLoggedIn")
       Cookies.remove("isLoggedIn")
       setIsLoggedIn(false)
+      setLogInUser({})
     }
   }, []);
 
