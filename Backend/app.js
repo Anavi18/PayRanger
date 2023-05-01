@@ -25,16 +25,6 @@ app.post("/getEmployees", async (req, res) => {
     }
 });
 
-app.get("/getEmployee", async (req, res) => {
-    try{
-        id = req.body.employeeId
-        data = await employeeModel.find({ employeeId: id});
-        res.json(data)
-    }catch(error){
-        res.json(error)
-    }
-});
-
 app.post("/login", async (req, res) => {
     try{
         username = req.body.email
@@ -49,7 +39,7 @@ app.post("/login", async (req, res) => {
             "firstName": user.firstName,
             "lastName": user.lastName,
             "isManager": user.isManager
-        })
+            })
         }
         else{
             res.status(401).json({})
@@ -61,6 +51,7 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
+        console.log(req.body)
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate
@@ -70,30 +61,30 @@ app.post("/getHoursWorked", async (req, res) => {
         eyear = parseInt(end.slice(0, 4))
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
-
+	    
         startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
         endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-        // console.log(startDate)
-        // console.log(endDate)
 
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
         sal = parseFloat(user.salary)
-
         let numHours = 0;
         let timeEntries = data.timeEntries
-        // console.log(timeEntries)
-        // console.log("Salary: "+sal)
         for (let x = 0; x < timeEntries.length; x++){
-
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
+        }   
+        earned = sal * numHours
+
+        if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
+            res.status(401).json({})
         }
-        sal = sal * numHours
-        res.json({"response":200, "numHours": numHours,"Salary":sal})
+        else{
+            res.status(200).json({"numHours": numHours, "earned": earned})
+        }
     }catch(error){
-        res.json(error)
+        res.status(400).json(error)
     }
 });
 
