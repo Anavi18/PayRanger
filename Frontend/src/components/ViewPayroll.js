@@ -3,7 +3,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
+import dayjs, {Dayjs} from "dayjs";
 
 
 function Wage({wage, hour}) {

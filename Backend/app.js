@@ -41,32 +41,28 @@ app.get("/getEmployee", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try{
+	
         username = req.body.email
         pwd = req.body.password
 
         user = await employeeModel.findOne({ email: username});
-        
-        if (user && user.password == pwd){
-            res.status(200);
-            res.json({
-            "response": "Successfully logged in!", 
-            "email": user.email, 
-            "firstName": user.firstName, 
-            "lastName": user.lastName,
-            "employeeId":user.employeeId, 
-            "auth": true})
+	
+        if (user.password == pwd){
+            id = user.employeeId
+            res.json({"response": "OK", "employeeId":id})
         }
         else{
             res.status(401);
             res.json({"response": "not OK, password is incorrect", "auth": false})
         }   
     }catch(error){
-        res.json(error)
+	res.json({"response": "not OK, user does not exist"})
     }
 });
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
+        console.log(req.body)
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate
@@ -77,15 +73,19 @@ app.post("/getHoursWorked", async (req, res) => {
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
 
-        startDate = new Date(syear,smonth-1,sday)
-        endDate = new Date(eyear,emonth-1,eday)
-
+	if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
+            startDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
+            endDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+        }
+        else{
+            startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
+            endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
+        }
 
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
         
         sal = parseFloat(user.salary)
-       
 
         let numHours = 0;
         let timeEntries = data.timeEntries
@@ -100,6 +100,7 @@ app.post("/getHoursWorked", async (req, res) => {
         sal = sal * numHours
         res.json({"response":"OK", "numHours": numHours,"Salary":sal})
     }catch(error){
+	      console.log("Here with error", error)
         res.json(error)
     }
 });
