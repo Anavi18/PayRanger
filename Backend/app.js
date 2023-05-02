@@ -91,7 +91,6 @@ app.post("/getHoursWorked", async (req, res) => {
         }
     }catch(error){
         res.status(400).json(error)
-
     }
 })
 
@@ -132,7 +131,7 @@ app.patch("/submitTime", async (req, res) => {
 		await data.save()
 
 		res.status(200).send({})
-	}catch{
+	}catch(error){
 		res.status(400).send(error)
 	}
 })
