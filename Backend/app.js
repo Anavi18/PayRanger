@@ -110,7 +110,7 @@ app.patch("/submitTime", async (req, res) => {
     
 		data = await timeEntryModel.findOne({ employeeId: id});
         let timeEntries = data.timeEntries 
-        console.log('hereee??')
+   
         let entryExists = false;
         for (let x = 0; x < timeEntries.length; x++){
             if(timeEntries[x].date.getTime() == newDate.getTime()){
