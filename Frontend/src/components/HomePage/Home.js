@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Home.css";
 import clock from "../pictures/clock.jpeg";
 import money from "../pictures/money.jpeg";
@@ -58,6 +58,10 @@ const ViewEmployee = () => {
 
 function Home(props){
   const {user, setUser} = props
+  
+  if (!document.cookie.includes('isLoggedIn=true')) {
+    return <Navigate to="/" replace />;
+  }
 
 
   return (
