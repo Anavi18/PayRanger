@@ -56,7 +56,6 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
-        console.log(req.body)
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate

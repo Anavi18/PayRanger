@@ -18,6 +18,9 @@ import {
   ModalBody,
 } from "reactstrap";
 import Cookies from "js-cookie";
+
+
+
 function Emp_view({ hour }) {
   const wage = hour * 50;
 
@@ -35,6 +38,8 @@ function Emp_view({ hour }) {
     </div>
   );
 }
+
+
 
 function EmpPayroll() {
   const [viewClicked, setViewClicked] = React.useState(false);
@@ -65,6 +70,9 @@ function EmpPayroll() {
     </div>
   );
 }
+
+
+
 async function getEmployeeTable(id) {
     console.log(id);
     const response = await fetch("http://localhost:8082/getEmployees", {
@@ -90,7 +98,6 @@ export default function ViewEmployees() {
   // Make a request to the server
   const [employees, setEmployees] = React.useState([]);
   let [count, setCount] = React.useState(0)
- 
   React.useEffect( () => {
     const doRequest = async() => {
       const user = JSON.parse(Cookies.get("userLoggedIn"));
@@ -101,7 +108,6 @@ export default function ViewEmployees() {
     doRequest();
     console.log("Number of employees", employees.length);
   }, []);
-
   const [searchQuery, setSearchQuery] = React.useState("");
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
@@ -109,79 +115,57 @@ export default function ViewEmployees() {
   let [lastname, setLastname] = React.useState("")
   let [datevalue, setDate] = React.useState("")
   let [selectedEmp, setSelectedEmp] = React.useState(null);
-  
-
-
-
   const filteredEmp = employees.filter(
     (item) =>
       item.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.lastName.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
   const handleSelectEmp = (empId) => {
     const emp = employees.find((emp) => emp.id === empId)
     setSelectedEmp(emp)
     setIsModalOpen(!isModalOpen);
-    
   }
-
   const handleFirstName = (event) => {
     setFirstname(event.target.value)
   }
-
   const handleLastName = (event) => {
     setLastname(event.target.value)
   }
-
   const handleDob = (event) => {
     setDate(event.target.value)
   }
-
-  
-
   const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
- 
-
   const handleSearchSubmit = (event) => {
     event.preventDefault();
   };
-
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
   const toggleAddModal = () => {
     setIsAddModalOpen(!isAddModalOpen);
   };
-
-
   const closeBtn = (
     <button className="close " onClick={toggleModal} type="button">
       &times;
     </button>
   );
-
   const closeAddBtn = 
   (
     <button className="close " onClick={toggleAddModal} type="button">
       &times;
     </button>
   );
-
   return (
     <div className="homebg">
       <div className="container  ">
         <div className="employeeBox ">
-          <div>
             <div
               className="mb-4 d-flex justify-content-center"
               style={{ color: "#162938" }}
             >
-              <h2>Team Name</h2>
+              <h2>Your Team</h2>
             </div>
 
             <form className="d-flex srch-parent" role="search">
@@ -201,7 +185,6 @@ export default function ViewEmployees() {
                 Search
               </button>
             </form>
-
             <div className="  d-flex justify-content-center ">
               <div className="list-container">
                 <ul className="list-group em_list">
@@ -217,7 +200,6 @@ export default function ViewEmployees() {
                     </li>
                   ))}
                 </ul>
-
                 {selectedEmp && (
                     <Modal
                     isOpen={isModalOpen}
@@ -244,55 +226,30 @@ export default function ViewEmployees() {
                           <h4>DOB: {selectedEmp.dob}</h4>
                         </div>
                       </div>
-  
                       <div className="work_info mt-2">
                         <h3 className="mb-3">Payroll & Hours Worked</h3>
                         <EmpPayroll />
                       </div>
                     </ModalBody>
                   </Modal>
-
                 )}
-                
               </div>
             </div>
 
             <div className="metric">
-
                 <div className=" mt-4 ">
                     <button
                         className="btn count-btn"
                         type="submit"
-                     
-                    
                     >
                         Teammates Counted: {count}
                     </button>
-
-
                 </div>
-
-
                 <div className=" mt-4 ">
                 </div>
-
-
             </div>
-
-            
-
-
-
-
-
-      
-
-            
-            
-
           </div>
         </div>
-      </div>
     </div>
   );
 }
