@@ -66,11 +66,11 @@ function EmpPayroll() {
     </div>
   );
 }
-async function getEmployeeTable() {
-    console.log("Here");
+async function getEmployeeTable(id) {
+    console.log(id);
     const response = await fetch("http://localhost:8082/getEmployees", {
       method: 'POST',
-      body: JSON.stringify({ employeeId: 2, companyId: 1 }),
+      body: JSON.stringify({ employeeId: id, companyId: 1 }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -87,14 +87,14 @@ async function getEmployeeTable() {
 
 
 
-export default function ViewEmployees() {
+export default function ViewEmployees(props) {
   // Make a request to the server
   const [employees, setEmployees] = React.useState([]);
   let [count, setCount] = React.useState(0)
-
+  const {user} = props;
   React.useEffect( () => {
     const doRequest = async() => {
-      const result = await getEmployeeTable();
+      const result = await getEmployeeTable(user.employeeId);
       setEmployees(result);
     }
     doRequest();
