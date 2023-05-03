@@ -16,7 +16,7 @@ const totalTime = (from, to) => {
   return timeDiffInHour.toFixed(2);
 };
 
-function TotalTime({ timeWorked, exist}) {
+function TotalTime({ timeWorked, exist, invalidDate}) {
 
   if (isNaN(timeWorked)) {
     return (
@@ -24,6 +24,15 @@ function TotalTime({ timeWorked, exist}) {
         You need to enter your start and end time!{" "}
       </div>
     );
+  }
+  else if (invalidDate){
+    return (
+      <div  className="text-danger d-flex justify-content-center">
+        Please enter a valid date!{" "}
+      </div>
+
+    )
+
   }
   else if (exist){
     return (
@@ -33,6 +42,7 @@ function TotalTime({ timeWorked, exist}) {
 
     )
   }
+
 
   return (
     <div className="d-flex justify-content-center btn btn-success text-dark"> 
@@ -50,15 +60,26 @@ export default function EnterTime(props) {
   const [clicked, setClicked] = React.useState(false);
   const [time, setTime] = React.useState(0);
   const [exist, setExist] = React.useState(false);
+  const [invalidDate, setInvalidDate] = React.useState(false);
   const {user} = props
 
+  console.log("1 " + exist.toString())
 
   const handleTimeSubmit = async () => {
+
+    if (new Date() < dateWork){
+      setInvalidDate(true);
+      return
+      
+
+    }
 
     let timeworked = totalTime(fromTime, toTime)
     setTime(timeworked);
     setClicked(true)
-  
+    setExist(false)
+    setInvalidDate(false)
+    console.log("2 " + exist.toString())
     
     const response = await fetch("http://localhost:8082/submitTime", {
       method: 'PATCH',
@@ -67,20 +88,14 @@ export default function EnterTime(props) {
         'Content-Type': 'application/json'
       }
     }).then( (response) => response.json()).then(res => {
-        if(JSON.stringify(res) == "{}") {
-            return;
-        }
-        if (res.response == "exist"){
-        
-          setExist(true)
-        }
-        else {
-          setExist(false)
-
-        }
-
+        console.log(res)
+        if(res.status == "existed") {
+          console.log("here")
+          setExist(true)    
+        } 
 
         
+   
 
     });
     
@@ -118,7 +133,7 @@ export default function EnterTime(props) {
               Save
             </div>
             <div className="mt-4  msg">
-              {clicked && <TotalTime timeWorked = {time} exist = {exist} />}
+              {clicked && <TotalTime timeWorked = {time} exist = {exist} invalidDate = {invalidDate}/>}
             </div>
           </LocalizationProvider>
       </div>
