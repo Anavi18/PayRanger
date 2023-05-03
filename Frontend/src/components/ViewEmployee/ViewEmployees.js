@@ -91,14 +91,16 @@ export default function ViewEmployees(props) {
   // Make a request to the server
   const [employees, setEmployees] = React.useState([]);
   let [count, setCount] = React.useState(0)
-  const {user} = props;
   React.useEffect( () => {
     const doRequest = async() => {
+      const {user} = props;
+      console.log(props);
       const result = await getEmployeeTable(user.employeeId);
       setEmployees(result);
+      setCount(result.length);
     }
     doRequest();
-    setCount(employees.length);
+    console.log("Number of employees", employees.length);
   }, []);
 
   const [searchQuery, setSearchQuery] = React.useState("");
