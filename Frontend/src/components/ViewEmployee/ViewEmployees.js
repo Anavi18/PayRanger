@@ -70,7 +70,7 @@ async function getEmployeeTable() {
     console.log("Here");
     const response = await fetch("http://localhost:8082/getEmployees", {
       method: 'POST',
-      body: JSON.stringify({ employeeId: 1, companyId: 1 }),
+      body: JSON.stringify({ employeeId: 2, companyId: 1 }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -163,20 +163,6 @@ export default function ViewEmployees() {
     setIsAddModalOpen(!isAddModalOpen);
   };
 
-  const handleAddTeammate = (event) => {
-    event.preventDefault()
-    if (firstname != "" && lastname != ""){
-        let new_emp = {id: uuid(), first: firstname, last: lastname, dob: datevalue}
-        setEmployees([...employees, new_emp])
-        setCount(count + 1)
-
-    }
-    
-    
-    setFirstname("")
-    setLastname("")
-    setDate("")
-  }
 
   const closeBtn = (
     <button className="close " onClick={toggleModal} type="button">
@@ -304,16 +290,6 @@ export default function ViewEmployees() {
 
 
                 <div className=" mt-4 ">
-                    <button
-                        className="btn btn-lg add-btn"
-                        type="submit"
-                        onClick={toggleAddModal}
-                    
-                    >
-                        Add
-                    </button>
-
-
                 </div>
 
 
@@ -325,52 +301,7 @@ export default function ViewEmployees() {
 
 
 
-            <Modal
-                  isOpen={isAddModalOpen}
-                  toggle={toggleAddModal}
-                  className="my-emp-modal"
-                >
-                  <ModalHeader
-                    toggle={toggleAddModal}
-                    className="modal-head"
-                    close={closeAddBtn}
-                  >
-                    Add A Teammate
-                  </ModalHeader>
-                  <ModalBody className="modal-body">
-                    <Form>
-                        <FormGroup className="add_teammate">
-                            <Label htmlFor="firstname" >First Name</Label>
-                            <Input id="firstname" name="firstname" type = "text" value = {firstname} onChange={handleFirstName}/>
-
-                        </FormGroup>
-                        <FormGroup className="add_teammate">
-                            <Label htmlFor="lastname">Last Name</Label>
-                            <Input id="lastname" name="lastname" type = "text"  value = {lastname} onChange={handleLastName} />
-
-                        </FormGroup>
-                        <FormGroup className="add_teammate">
-                            <Label htmlFor="dob">Date of Birth</Label>
-                            <Input id="dob" name="dob" type = "date" value = {datevalue} onChange={handleDob} />
-
-                        </FormGroup>
-                     
-
-                            <div className="d-flex justify-content-center mt-3">
-                                <button className="btn modal-add-btn" type = "submit" onClick={handleAddTeammate}>Add</button>
-                            </div>
-
-
-               
-
-                       
-                        
-                    </Form>
-                    
-
-                    
-                  </ModalBody>
-                </Modal>
+      
 
             
             
