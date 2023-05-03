@@ -5,7 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./employee.css";
 import "./employee_db";
-import { employees } from "./employee_db";
+//import { employees } from "./employee_db";
 import emp_photo from "../pictures/emp_pic.jpeg";
 import { v4 as uuid } from 'uuid';
 import {
@@ -66,12 +66,40 @@ function EmpPayroll() {
     </div>
   );
 }
+async function getEmployeeTable() {
+    console.log("Here");
+    const response = await fetch("http://localhost:8082/getEmployees", {
+      method: 'POST',
+      body: JSON.stringify({ employeeId: 1, companyId: 1 }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then( (response) => {
+      if (response.status != 200) {
+        console.log("Error status code", response.status);
+        return [];
+      }
+      return response.json(); 
+     });
+     console.log(response);
+     return response;
+}
 
-export default function ViewEmployee() {
+
+
+export default function ViewEmployees() {
+  // Make a request to the server
+  const [employees, setEmployees] = React.useState([]);
+ 
+  React.useEffect( () => {
+    const doRequest = async() => {
+      const result = await getEmployeeTable();
+      setEmployees(result);
+    }
+    doRequest();
+  }, []);
 
   const [searchQuery, setSearchQuery] = React.useState("");
-
-
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
   let [firstname, setFirstname] = React.useState("")
