@@ -105,28 +105,27 @@ export default function ViewEmployees() {
   let [firstname, setFirstname] = React.useState("")
   let [lastname, setLastname] = React.useState("")
   let [datevalue, setDate] = React.useState("")
-  let [empLst, setEmLst] = React.useState(employees)
   let [selectedEmp, setSelectedEmp] = React.useState(null);
-  let [count, setCount] = React.useState(empLst.length)
+  let [count, setCount] = React.useState(employees.length)
 
 
 
-  const filteredEmp = empLst.filter(
+  const filteredEmp = employees.filter(
     (item) =>
-      item.first.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.last.toLowerCase().includes(searchQuery.toLowerCase())
+      item.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.lastName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSelectEmp = (empId) => {
-    const emp = empLst.find((emp) => emp.id === empId)
+    const emp = employees.find((emp) => emp.id === empId)
     setSelectedEmp(emp)
     setIsModalOpen(!isModalOpen);
     
   }
 
   const handleRemoveEmp = (empId) => {
-    const new_lst = empLst.filter(emp => emp.id !== empId)
-    setEmLst(new_lst)
+    const new_lst = employees.filter(emp => emp.id !== empId)
+    setEmployees(new_lst)
     setIsModalOpen(false)
     setCount(count - 1)
 
@@ -168,7 +167,7 @@ export default function ViewEmployees() {
     event.preventDefault()
     if (firstname != "" && lastname != ""){
         let new_emp = {id: uuid(), first: firstname, last: lastname, dob: datevalue}
-        setEmLst([...empLst, new_emp])
+        setEmployees([...employees, new_emp])
         setCount(count + 1)
 
     }
@@ -232,7 +231,7 @@ export default function ViewEmployees() {
                       onClick={() => handleSelectEmp(emp.id)}
                     >
                       <p>
-                        {emp.first} {emp.last}
+                        {emp.firstName} {emp.lastName}
                       </p>
                     </li>
                   ))}
