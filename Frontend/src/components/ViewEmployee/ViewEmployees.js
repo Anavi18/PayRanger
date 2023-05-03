@@ -90,13 +90,15 @@ async function getEmployeeTable() {
 export default function ViewEmployees() {
   // Make a request to the server
   const [employees, setEmployees] = React.useState([]);
- 
+  let [count, setCount] = React.useState(0)
+
   React.useEffect( () => {
     const doRequest = async() => {
       const result = await getEmployeeTable();
       setEmployees(result);
     }
     doRequest();
+    setCount(employees.length);
   }, []);
 
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -106,7 +108,7 @@ export default function ViewEmployees() {
   let [lastname, setLastname] = React.useState("")
   let [datevalue, setDate] = React.useState("")
   let [selectedEmp, setSelectedEmp] = React.useState(null);
-  let [count, setCount] = React.useState(employees.length)
+  
 
 
 
