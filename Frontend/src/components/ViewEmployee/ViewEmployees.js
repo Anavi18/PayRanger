@@ -4,7 +4,6 @@ import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./employee.css";
-import "./employee_db";
 //import { employees } from "./employee_db";
 import emp_photo from "../pictures/emp_pic.jpeg";
 import { v4 as uuid } from 'uuid';
@@ -18,7 +17,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
-
+import Cookies from "js-cookie";
 function Emp_view({ hour }) {
   const wage = hour * 50;
 
@@ -87,14 +86,14 @@ async function getEmployeeTable(id) {
 
 
 
-export default function ViewEmployees(props) {
+export default function ViewEmployees() {
   // Make a request to the server
   const [employees, setEmployees] = React.useState([]);
   let [count, setCount] = React.useState(0)
+ 
   React.useEffect( () => {
     const doRequest = async() => {
-      const {user} = props;
-      console.log(props);
+      const user = JSON.parse(Cookies.get("userLoggedIn"));
       const result = await getEmployeeTable(user.employeeId);
       setEmployees(result);
       setCount(result.length);
