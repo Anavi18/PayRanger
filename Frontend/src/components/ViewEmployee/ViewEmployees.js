@@ -125,14 +125,6 @@ export default function ViewEmployees() {
     
   }
 
-  const handleRemoveEmp = (empId) => {
-    const new_lst = employees.filter(emp => emp.id !== empId)
-    setEmployees(new_lst)
-    setIsModalOpen(false)
-    setCount(count - 1)
-
-  }
-
   const handleFirstName = (event) => {
     setFirstname(event.target.value)
   }
@@ -255,17 +247,6 @@ export default function ViewEmployees() {
                       <div className="work_info mt-2">
                         <h3 className="mb-3">Payroll & Hours Worked</h3>
                         <EmpPayroll />
-                      </div>
-                      <div className="mt-3">
-                        <button
-                                className="btn btn-lg remove-btn"
-                                type="submit"
-                                
-                                onClick={() => handleRemoveEmp(selectedEmp.id)}
-                            >
-                                Remove
-                        </button>
-
                       </div>
                     </ModalBody>
                   </Modal>
