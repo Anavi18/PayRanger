@@ -26,6 +26,7 @@ function TotalTime({ timeWorked, exist, invalidDate}) {
     );
   }
   else if (invalidDate){
+   
     return (
       <div  className="text-danger d-flex justify-content-center">
         Please enter a valid date!{" "}
@@ -63,23 +64,24 @@ export default function EnterTime(props) {
   const [invalidDate, setInvalidDate] = React.useState(false);
   const {user} = props
 
-  console.log("1 " + exist.toString())
+ 
 
   const handleTimeSubmit = async () => {
+    setClicked(true)
 
     if (new Date() < dateWork){
+     
       setInvalidDate(true);
       return
       
-
     }
 
     let timeworked = totalTime(fromTime, toTime)
     setTime(timeworked);
-    setClicked(true)
+    
     setExist(false)
     setInvalidDate(false)
-    console.log("2 " + exist.toString())
+  
     
     const response = await fetch("http://localhost:8082/submitTime", {
       method: 'PATCH',
@@ -90,7 +92,6 @@ export default function EnterTime(props) {
     }).then( (response) => response.json()).then(res => {
         console.log(res)
         if(res.status == "existed") {
-          console.log("here")
           setExist(true)    
         } 
 

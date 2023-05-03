@@ -8,7 +8,7 @@ import { DropdownContext } from "../../DropdownContext";
 import Cookies from "js-cookie";
 function Header(props) {
    
-    const {user, setUser, isLoggedIn, setIsLoggedIn} = props
+    const {user, setUser, isLoggedIn, setIsLoggedIn, setUsername, setPassword} = props
  
   
   
@@ -53,7 +53,7 @@ function Header(props) {
             <Link to="/employee" onClick={toggleDropdownOff}>View Employee</Link>
           </div>
           <div>
-            <Link to="/" onClick={() => {setIsLoggedIn(false); Cookies.remove('isLoggedIn'); Cookies.remove('user'); setUser(null); toggleDropdownOff();}}>Log Out</Link>
+            <Link to="/" onClick={() => {setIsLoggedIn(false); Cookies.remove('isLoggedIn'); Cookies.remove('user'); setUser(null); setUsername(""); setPassword(""); toggleDropdownOff();}}>Log Out</Link>
           </div>
         </div>);
     }
