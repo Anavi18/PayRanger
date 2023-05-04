@@ -56,6 +56,13 @@ const ViewEmployee = () => {
    
 }
 
+function isManager(){
+    let cookieValue = Cookies.get('userLoggedIn');
+    let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
+    let isManager = userLoggedIn.isManager;
+    return isManager;
+}
+
 function Home(props){
   const {user, setUser} = props
   
@@ -63,6 +70,24 @@ function Home(props){
     return <Navigate to="/" replace />;
   }
 
+
+  if (!isManager()) {
+    return (
+      <div className="homebg">
+        <div className="container d-flex align-items-center">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-6 mb-4">
+              <EnterTime />
+            </div>
+            <div className="col-12 col-md-6">
+              <ViewPayroll />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     

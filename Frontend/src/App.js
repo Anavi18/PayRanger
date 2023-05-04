@@ -58,6 +58,8 @@ function Body() {
       Cookies.set("userLoggedIn", JSON.stringify(user));
       navigate("/Home");
 
+      
+
       // set user context to authenticated
     } else {
       console.log("Incorrect username or password");
