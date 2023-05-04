@@ -56,7 +56,7 @@ const ViewEmployee = () => {
    
 }
 
-function isManager(){
+function isManager(){ //checks cookies to see if manager 
     let cookieValue = Cookies.get('userLoggedIn');
     let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
     let isManager = userLoggedIn.isManager;
@@ -70,7 +70,8 @@ function Home(props){
     return <Navigate to="/" replace />;
   }
 
-
+  // home page if not a manager
+  // added slight spacing without touching css
   if (!isManager()) {
     return (
       <div className="homebg">

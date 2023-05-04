@@ -9,6 +9,7 @@ import { employees } from "./employee_db";
 import emp_photo from "../pictures/emp_pic.jpeg";
 import { v4 as uuid } from 'uuid';
 import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import {
   Button,
   Form,
@@ -82,8 +83,18 @@ export default function ViewEmployee() {
   let [selectedEmp, setSelectedEmp] = React.useState(null);
   let [count, setCount] = React.useState(empLst.length)
 
-  if (!document.cookie.includes('isLoggedIn=true')) {
-    return <Navigate to="/" replace />;
+  function isManager(){ //checks cookies to see if manager 
+    let cookieValue = Cookies.get('userLoggedIn');
+    let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
+    let isManager = userLoggedIn.isManager;
+    return isManager;
+}  
+
+  //if not mananger go to /home
+  //from there if not logged-in then it will redirect to login
+  //therefore cannot access /employee if not logged-in or not a manager
+  if (!document.cookie.includes('isLoggedIn=true') || !isManager()) {
+    return <Navigate to="/home" replace />;
   }
 
 
