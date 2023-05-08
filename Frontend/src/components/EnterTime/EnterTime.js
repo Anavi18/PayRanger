@@ -6,6 +6,7 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Stack from "@mui/material/Stack";
 import "./entertime.css";
 import { setRef } from "@mui/material";
+import { Navigate } from "react-router-dom";
 
 const totalTime = (from, to) => {
   const timeDiffInMs = to - from;
@@ -64,7 +65,9 @@ export default function EnterTime(props) {
   const [invalidDate, setInvalidDate] = React.useState(false);
   const {user} = props
 
- 
+  if (!document.cookie.includes('isLoggedIn=true')) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleTimeSubmit = async () => {
     setClicked(true)

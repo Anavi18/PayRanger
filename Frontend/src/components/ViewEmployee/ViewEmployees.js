@@ -9,6 +9,7 @@ import "./employee_db";
 import { employees } from "./employee_db";
 import emp_photo from "../pictures/emp_pic.jpeg";
 import { v4 as uuid } from 'uuid';
+import { Navigate } from "react-router-dom";
 import {
   Button,
   Form,
@@ -112,6 +113,10 @@ export default function ViewEmployee(props) {
   let [empLst, setEmpLst] = React.useState([])
   let [selectedEmp, setSelectedEmp] = React.useState(null);
   let [count, setCount] = React.useState(empLst.length)
+
+  if (!document.cookie.includes('isLoggedIn=true')) {
+    return <Navigate to="/" replace />;
+  }
 
   useEffect(() => {
     async function fetchData() {

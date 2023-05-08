@@ -4,6 +4,7 @@ import Stack from "@mui/material/Stack";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, {Dayjs} from "dayjs";
+import { Navigate } from "react-router-dom";
 
 
 function Wage({wage, hour}) {
@@ -38,6 +39,9 @@ export default function ViewPayroll(props) {
 
     const {user} = props
 
+    if (!document.cookie.includes('isLoggedIn=true')) {
+        return <Navigate to="/" replace />;
+      }
     const handleViewPayroll = async () => {
        
         setClicked(true)
