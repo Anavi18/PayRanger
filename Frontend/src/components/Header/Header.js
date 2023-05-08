@@ -6,13 +6,18 @@ import { Link } from "react-router-dom";
 import { LoginContext } from "../LogIn/LoginContext";
 import { DropdownContext } from "../../DropdownContext";
 import Cookies from "js-cookie";
+
+function isManager(){ //checks cookies to see if manager 
+  let cookieValue = Cookies.get('userLoggedIn');
+  let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
+  let isManager = userLoggedIn.isManager;
+  return isManager;
+}
+
 function Header(props) {
    
     const {user, setUser, isLoggedIn, setIsLoggedIn, setUsername, setPassword} = props
- 
-  
-  
-    
+     
     let dropdownPair = useContext(DropdownContext);
     let loginPair = useContext(LoginContext);
 
@@ -49,9 +54,13 @@ function Header(props) {
           <div>
             <Link to="/payroll" onClick={toggleDropdownOff}>View Payroll</Link>
           </div>
-          <div>
-            <Link to="/employee" onClick={toggleDropdownOff}>View Employee</Link>
-          </div>
+          {
+            isManager() && (
+              <div>
+                <Link to="/employee" onClick={toggleDropdownOff}>View Employee</Link>
+              </div>)
+            }
+    
           <div>
             <Link to="/" onClick={() => {setIsLoggedIn(false); Cookies.remove('isLoggedIn'); Cookies.remove('user'); setUser(null); setUsername(""); setPassword(""); toggleDropdownOff();}}>Log Out</Link>
           </div>
