@@ -7,15 +7,14 @@
     border-radius: 20px;
     backdrop-filter: blur(20px);
     box-shadow: 0 0 30px rgba(0,0,0,.5);
-    padding: 2rem;
     /* background-color: rgb(224, 198, 198); */
     background-color: rgb(246, 246, 246);
-
 
 }
 
 .em_list{
-    width: 100%;
+    width: 45rem;
+
 
 }
 .em {
@@ -85,6 +84,7 @@
     padding-right: 30px;
     padding-left: 10px;
 
+
 }
 
 ::-webkit-scrollbar {
@@ -106,7 +106,7 @@
 
 .my-emp-modal .modal-body,.modal-head{
     border-color: #162938;
-    background-color: rgb(224, 198, 198);
+    background-color: white;
 
   }
 
@@ -135,11 +135,11 @@
     width: 40%;
     height: 50%;
 }
-.emp_info{
+/* .emp_info{
     display: inline-flex;
     flex-direction: row;
 
-}
+} */
 
 .firstLast{
     margin-left: 3rem;
@@ -246,7 +246,6 @@
     color: white;
     display: flex;
     font-size: medium;
-    margin-right: 27rem;
     width: max-content;
     
 }
