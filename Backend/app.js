@@ -13,7 +13,6 @@ const timeEntryModel = require("./models/time-entries")
 
 app.post("/getEmployees", async (req, res) => {
     try{
-        console.log(req.body);
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
         let array = []
         if(employee.isManager){
@@ -26,8 +25,6 @@ app.post("/getEmployees", async (req, res) => {
                 "companyId": x.companyId
             }))
         }
-        console.log("hello")
-        console.log(array)
         res.status(200).json(array)
     }catch(error){
         res.status(400).json(error)

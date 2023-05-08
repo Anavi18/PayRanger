@@ -112,7 +112,7 @@ export default function ViewEmployee(props) {
   let [empLst, setEmpLst] = React.useState([])
   let [selectedEmp, setSelectedEmp] = React.useState(null);
   let [count, setCount] = React.useState(empLst.length)
-
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -125,6 +125,7 @@ export default function ViewEmployee(props) {
         }).then( (response) => response.json()).then(res => {
           if (res.length > 0){
             setEmpLst(res)
+            setCount(res.length)
             
           }
          });
@@ -136,6 +137,9 @@ export default function ViewEmployee(props) {
 
     fetchData();
   }, [user]);
+  
+
+  
 
 
   const filteredEmp = empLst.filter(
