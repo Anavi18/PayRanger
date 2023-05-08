@@ -13,9 +13,11 @@ const timeEntryModel = require("./models/time-entries")
 
 app.post("/getEmployees", async (req, res) => {
     try{
+        console.log(req.body);
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
         let array = []
         if(employee.isManager){
+            console.log("here??")
             data = await employeeModel.find({managerId: employee.employeeId});
             data.forEach((x)=>array.push({ 
                 "firstName": x.firstName, 
@@ -24,6 +26,8 @@ app.post("/getEmployees", async (req, res) => {
                 "companyId": x.companyId
             }))
         }
+        console.log("hello")
+        console.log(array)
         res.status(200).json(array)
     }catch(error){
         res.status(400).json(error)
@@ -36,7 +40,6 @@ app.post("/login", async (req, res) => {
         pwd = req.body.password
 
         user = await employeeModel.findOne({ email: username});
-
         if (user != null && user.password == pwd){
             res.status(200).json({ 
             "employeeId": user.employeeId, 
@@ -56,7 +59,6 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
-        
         id = req.body.employeeId
         start = req.body.startDate
         end = req.body.endDate
