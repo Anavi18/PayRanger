@@ -114,9 +114,7 @@ export default function ViewEmployee(props) {
   let [selectedEmp, setSelectedEmp] = React.useState(null);
   let [count, setCount] = React.useState(empLst.length)
 
-  if (!document.cookie.includes('isLoggedIn=true')) {
-    return <Navigate to="/" replace />;
-  }
+
 
   useEffect(() => {
     async function fetchData() {
@@ -142,11 +140,15 @@ export default function ViewEmployee(props) {
 
     fetchData();
   }, [user]);
-  
+
+
+  if (!document.cookie.includes('isLoggedIn=true')) {
+    return <Navigate to="/" replace />;
+  }
 
   
 
-
+  
   const filteredEmp = empLst.filter(
     (item) =>
       item.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
