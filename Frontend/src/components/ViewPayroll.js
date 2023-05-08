@@ -44,6 +44,10 @@ export default function ViewPayroll(props) {
         return <Navigate to="/" replace />;
       }
     const handleViewPayroll = async () => {
+        if (start > end){
+            alert("Invalid day range")
+            return
+        }
        
         setClicked(true)
         const response = await fetch("http://localhost:8082/getHoursWorked", {
