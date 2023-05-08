@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Home.css";
 import clock from "../pictures/clock.jpeg";
 import money from "../pictures/money.jpeg";
@@ -56,9 +56,38 @@ const ViewEmployee = () => {
    
 }
 
+function isManager(){
+    let cookieValue = Cookies.get('userLoggedIn');
+    let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
+    let isManager = userLoggedIn.isManager;
+    return isManager;
+}
+
 function Home(props){
   const {user, setUser} = props
+  
+  if (!document.cookie.includes('isLoggedIn=true')) {
+    return <Navigate to="/" replace />;
+  }
 
+
+  if (!isManager()) {
+    return (
+      <div className="homebg">
+        <div className="container d-flex align-items-center">
+          <div className="row justify-content-center">
+            <div className="col-12 col-md-6 mb-4">
+              <EnterTime />
+            </div>
+            <div className="col-12 col-md-6">
+              <ViewPayroll />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
 
   return (
     
