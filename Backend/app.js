@@ -69,9 +69,9 @@ app.post("/getHoursWorked", async (req, res) => {
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
 	    
-        startDate = new Date(syear,smonth-1,sday,-5,0,0,0)
-        endDate = new Date(eyear,emonth-1,eday,-5,0,0,0)
-
+        startDate = new Date(syear,smonth-1,sday)
+        endDate = new Date(eyear,emonth-1,eday)
+   
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
         sal = parseFloat(user.salary)
@@ -82,7 +82,8 @@ app.post("/getHoursWorked", async (req, res) => {
             if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
                 numHours = numHours + timeEntries[x].hoursWorked;
             }
-        }   
+        } 
+        
         earned = sal * numHours
 
         if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
@@ -98,6 +99,7 @@ app.post("/getHoursWorked", async (req, res) => {
 
 app.patch("/submitTime", async (req, res) => {
 	try{
+        
         id = req.body.employeeId
         date = req.body.date
         hoursWorked = req.body.hoursWorked
@@ -110,7 +112,7 @@ app.patch("/submitTime", async (req, res) => {
     
 		data = await timeEntryModel.findOne({ employeeId: id});
         let timeEntries = data.timeEntries 
-        
+   
         let entryExists = false;
         for (let x = 0; x < timeEntries.length; x++){
             if(timeEntries[x].date.getTime() == newDate.getTime()){
@@ -119,20 +121,21 @@ app.patch("/submitTime", async (req, res) => {
             }
         }
         
+        
         if (entryExists) {
-            res.status(440).json({})
+            res.status(440).json({"status": "existed"})
             return
         }
         if (new Date(mongoose.now()) < newDate) {
-            res.status(441).json({})
+            res.status(441).json({"status": "invalid"})
             return
         }
 
         let toAdd = {"date": newDate, "hoursWorked": hoursWorked}
         timeEntries.push(toAdd)
 		await data.save()
-
-		res.status(200).send({})
+        
+		res.status(200).send({"status": "ok"})
 	}catch(error){
 		res.status(400).send(error)
 	}
