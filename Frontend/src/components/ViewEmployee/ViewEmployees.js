@@ -100,7 +100,7 @@ function EmpPayroll(props) {
 export default function ViewEmployee(props) {
 
   const {user} = props
-  console.log(user)
+
 
   const [searchQuery, setSearchQuery] = React.useState("");
 
