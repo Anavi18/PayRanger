@@ -101,7 +101,7 @@ function EmpPayroll(props) {
 export default function ViewEmployee(props) {
 
   const {user} = props
-  console.log(user)
+
 
   const [searchQuery, setSearchQuery] = React.useState("");
 
@@ -115,6 +115,7 @@ export default function ViewEmployee(props) {
   let [selectedEmp, setSelectedEmp] = React.useState(null);
   let [count, setCount] = React.useState(empLst.length)
 
+
   function isManager(){ //checks cookies to see if manager 
     let cookieValue = Cookies.get('userLoggedIn');
     let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
@@ -125,6 +126,7 @@ export default function ViewEmployee(props) {
   //if not mananger go to /home
   //from there if not logged-in then it will redirect to login
   //therefore cannot access /employee if not logged-in or not a manager
+
 
 
   useEffect(() => {
@@ -139,6 +141,7 @@ export default function ViewEmployee(props) {
         }).then( (response) => response.json()).then(res => {
           if (res.length > 0){
             setEmpLst(res)
+            setCount(res.length)
             
           }
          });
@@ -156,6 +159,13 @@ export default function ViewEmployee(props) {
   }
 
 
+  if (!document.cookie.includes('isLoggedIn=true')) {
+    return <Navigate to="/" replace />;
+  }
+
+  
+
+  
   const filteredEmp = empLst.filter(
     (item) =>
       item.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||

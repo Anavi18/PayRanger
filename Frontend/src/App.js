@@ -62,7 +62,7 @@ function Body() {
 
       // set user context to authenticated
     } else {
-      console.log("Incorrect username or password");
+      alert("Login or password is incorrect. If you forgot your password, contact your administrator.")
     }
   };
 
