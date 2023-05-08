@@ -12,6 +12,8 @@ const TimeEntrySchema = new mongoose.Schema({
         date : Date,
         hoursWorked : Number
          }]
+  },{
+    versionKey:false
   });
 
   const timeEntryModel = mongoose.model("time-entries", TimeEntrySchema)
