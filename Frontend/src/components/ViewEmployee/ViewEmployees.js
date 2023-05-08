@@ -20,8 +20,8 @@ import {
   ModalBody,
 } from "reactstrap";
 
-function Emp_view({ hour }) {
-  const wage = hour * 50;
+function Emp_view({ hour, wage }) {
+
 
   return (
     <div>
@@ -38,30 +38,58 @@ function Emp_view({ hour }) {
   );
 }
 
-function EmpPayroll() {
+function EmpPayroll(props) {
   const [viewClicked, setViewClicked] = React.useState(false);
-  const [emp_hour, setHour] = React.useState(0);
+  const [start, setStart] = React.useState();
+  const [end, setEnd] = React.useState();
+  const [wage, setWage] = React.useState(0)
+  const [hour, setHour] = React.useState(0)
+  const {emp} = props
 
-  const viewEmpSubmit = (event) => {
-    event.preventDefault();
-    setViewClicked(true);
+  const handleViewPayroll = async () => {
+       
+    setViewClicked(true)
+    const response = await fetch("http://localhost:8082/getHoursWorked", {
+      method: 'POST',
+      body: JSON.stringify({ employeeId: emp.employeeId, startDate: start, endDate: end }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then( (response) => response.json() ).then(res => {
+        if(JSON.stringify(res) != "{}") {
+            setHour(res.numHours);
+            setWage( (res.earned).toFixed(2))
+        }
+   
 
-    setHour(Math.floor(Math.random() * 4000) + 40);
-  };
+
+    });
+    
+  }
+
+
 
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Stack spacing={3}>
-          <DatePicker label="FROM" />
-          <DatePicker label="TO" />
+          <DatePicker 
+          label="FROM" 
+          value={start}
+          onChange={(newValue) => setStart(newValue)}/>
+
+          <DatePicker 
+          label="TO"
+          value={end}
+          onChange={(newValue) => setEnd(newValue)}
+           />
         </Stack>
 
-        <div className="btn mt-4 view_emp_payroll_btn" onClick={viewEmpSubmit}>
+        <div className="btn mt-4 view_emp_payroll_btn" onClick={handleViewPayroll}>
           View
         </div>
         <div className="mt-4">
-          {viewClicked && <Emp_view hour={emp_hour} />}
+          {viewClicked && <Emp_view hour={hour} wage = {wage} />}
         </div>
       </LocalizationProvider>
     </div>
@@ -118,34 +146,14 @@ export default function ViewEmployee(props) {
 
 
 
-  const handleSelectEmp = (empId) => {
-    const emp = empLst.find((emp) => emp.id === empId)
-    setSelectedEmp(emp)
+  const handleSelectEmp = (empId, firstName, lastName) => {
+    
+    setSelectedEmp({employeeId: empId, firstName: firstName, lastName: lastName})
     setIsModalOpen(!isModalOpen);
     
   }
 
-  const handleRemoveEmp = (empId) => {
-    const new_lst = empLst.filter(emp => emp.id !== empId)
-    setEmpLst(new_lst)
-    setIsModalOpen(false)
-    setCount(count - 1)
 
-  }
-
-  const handleFirstName = (event) => {
-    setFirstname(event.target.value)
-  }
-
-  const handleLastName = (event) => {
-    setLastname(event.target.value)
-  }
-
-  const handleDob = (event) => {
-    setDate(event.target.value)
-  }
-
-  
 
   const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
@@ -212,7 +220,7 @@ export default function ViewEmployee(props) {
                     <li
                       className="list-group-item em btn"
                       key={emp.employeeId}
-                      onClick={() => handleSelectEmp(emp.employeeId)}
+                      onClick={() => handleSelectEmp(emp.employeeId, emp.firstName, emp.lastName)}
                     >
                       <p>
                         {emp.firstName} {emp.lastName}
@@ -242,27 +250,17 @@ export default function ViewEmployee(props) {
                           alt="..."
                         ></img>
                         <div className="firstLast">
-                          <h4>First name: {selectedEmp.first}</h4>
-                          <h4>Last name: {selectedEmp.last}</h4>
-                          <h4>DOB: {selectedEmp.dob}</h4>
+                          <h4>First name: {selectedEmp.firstName}</h4>
+                          <h4>Last name: {selectedEmp.lastName}</h4>
+                         
                         </div>
                       </div>
   
                       <div className="work_info mt-2">
                         <h3 className="mb-3">Payroll & Hours Worked</h3>
-                        <EmpPayroll />
+                        <EmpPayroll emp = {selectedEmp} />
                       </div>
-                      <div className="mt-3">
-                        <button
-                                className="btn btn-lg remove-btn"
-                                type="submit"
-                                
-                                onClick={() => handleRemoveEmp(selectedEmp.id)}
-                            >
-                                Remove
-                        </button>
-
-                      </div>
+                      
                     </ModalBody>
                   </Modal>
 
