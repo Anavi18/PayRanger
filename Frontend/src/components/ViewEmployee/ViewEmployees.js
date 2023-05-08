@@ -48,8 +48,9 @@ function EmpPayroll(props) {
 
   const handleViewPayroll = async () => {
     setViewClicked(true);
-    console.log("here")
+   
     if (start > end) {
+      setViewClicked(false);
       alert("Invalid range");
       return
     }
