@@ -134,7 +134,7 @@ export default function ViewEmployee(props) {
       try {
         const response = await fetch("http://localhost:8082/getEmployees", {
           method: 'POST',
-          body: JSON.stringify({ employeeId: user.employeeId }),
+          body: JSON.stringify({ employeeId: user.employeeId, companyId: user.companyId}),
           headers: {
             'Content-Type': 'application/json'
           }
