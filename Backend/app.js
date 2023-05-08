@@ -16,7 +16,6 @@ app.post("/getEmployees", async (req, res) => {
         employee = await employeeModel.findOne({employeeId: req.body.employeeId });
         let array = []
         if(employee.isManager){
-            console.log("here??")
             data = await employeeModel.find({managerId: employee.employeeId});
             data.forEach((x)=>array.push({ 
                 "firstName": x.firstName, 
@@ -66,8 +65,8 @@ app.post("/getHoursWorked", async (req, res) => {
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
 	    
-        startDate = new Date(syear,smonth-1,sday)
-        endDate = new Date(eyear,emonth-1,eday)
+        startDate = new Date(Date.UTC(syear,smonth-1,sday))
+        endDate = new Date(Date.UTC(eyear,emonth-1,eday))
    
         data = await timeEntryModel.findOne({ employeeId: id});
         user = await employeeModel.findOne({employeeId: id});
@@ -105,9 +104,21 @@ app.patch("/submitTime", async (req, res) => {
         month = parseInt(date.slice(5,7))
         day = parseInt(date.slice(8, 10))
 
-        newDate = new Date(year, month - 1, day)
+        newDate = new Date(Date.UTC(year, month - 1, day))
     
-		data = await timeEntryModel.findOne({ employeeId: id});
+		data = await timeEntryModel.findOne({ employeeId: id})
+
+        // create new doc in database if one doesn't exist
+        if (data == null) {
+            timeEntryModel.create({
+                "companyId": comId,
+                "employeeId": empId,
+                "timeEntries": [{"date": newDate, "hoursWorked": hoursWorked}]
+            })
+            res.status(201).send({"status": "ok"})
+            return
+        }
+
         let timeEntries = data.timeEntries 
    
         let entryExists = false;
@@ -117,14 +128,15 @@ app.patch("/submitTime", async (req, res) => {
                 break;
             }
         }
-        
+
+        let ESToffset = 1000*60*60*5
+        if (Date.now() < newDate.getTime()+ESToffset) {
+            res.status(441).json({"status": "invalid"})
+            return
+        }
         
         if (entryExists) {
             res.status(440).json({"status": "existed"})
-            return
-        }
-        if (new Date(mongoose.now()) < newDate) {
-            res.status(441).json({"status": "invalid"})
             return
         }
 
