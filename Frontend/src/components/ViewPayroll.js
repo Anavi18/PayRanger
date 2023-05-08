@@ -39,6 +39,7 @@ export default function ViewPayroll(props) {
 
     const {user} = props
 
+    // check if logged-in if not then go back to logIn
     if (!document.cookie.includes('isLoggedIn=true')) {
         return <Navigate to="/" replace />;
       }

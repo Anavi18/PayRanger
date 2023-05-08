@@ -65,6 +65,7 @@ export default function EnterTime(props) {
   const [invalidDate, setInvalidDate] = React.useState(false);
   const {user} = props
 
+  // check if logged-in if not then go back to logIn
   if (!document.cookie.includes('isLoggedIn=true')) {
     return <Navigate to="/" replace />;
   }
