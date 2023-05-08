@@ -125,9 +125,7 @@ export default function ViewEmployee(props) {
   //if not mananger go to /home
   //from there if not logged-in then it will redirect to login
   //therefore cannot access /employee if not logged-in or not a manager
-  if (!document.cookie.includes('isLoggedIn=true') || !isManager()) {
-    return <Navigate to="/home" replace />;
-  }
+
 
   useEffect(() => {
     async function fetchData() {
@@ -151,7 +149,11 @@ export default function ViewEmployee(props) {
     }
 
     fetchData();
-  }, [user]);
+  }, 
+  [user]);
+  if (!document.cookie.includes('isLoggedIn=true') || !isManager()) {
+    return <Navigate to="/home" replace />;
+  }
 
 
   const filteredEmp = empLst.filter(
