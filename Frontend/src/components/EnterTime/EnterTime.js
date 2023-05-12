@@ -76,6 +76,26 @@ export default function EnterTime(props) {
     }
     setTime(timeworked);
 
+    
+    setExist(false)
+    setInvalidDate(false)
+  
+    
+    const response = await fetch("http://localhost:8082/submitTime", {
+      method: 'PATCH',
+      body: JSON.stringify({ employeeId: user.employeeId, companyId: user.companyId, date: dateWork, hoursWorked: timeworked }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then( (response) => response.json()).then(res => {
+        console.log(res)
+        if(res.status == "existed") {
+          setExist(true)    
+        } 
+
+
+
+
     setExist(false);
     setInvalidDate(false);
 

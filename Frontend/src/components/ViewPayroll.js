@@ -52,7 +52,7 @@ export default function ViewPayroll(props) {
         setClicked(true)
         const response = await fetch("http://localhost:8082/getHoursWorked", {
           method: 'POST',
-          body: JSON.stringify({ employeeId: user.employeeId, startDate: start, endDate: end }),
+          body: JSON.stringify({ employeeId: user.employeeId, companyId: user.companyId, startDate: start, endDate: end }),
           headers: {
             'Content-Type': 'application/json'
           }

@@ -95,7 +95,7 @@ function Body() {
         />
         <Route path="/enter-time" element={<EnterTime user={logInUser} />} />
         <Route path="/payroll" element={<ViewPayroll user={logInUser} />} />
-        <Route path="/employee" element={<ViewEmployees user={logInUser} />} />
+        <Route path="/employee" element={<ViewEmployees user={logInUser}  />} />
       </Routes>
     </div>
   );
