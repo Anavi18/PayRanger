@@ -92,32 +92,14 @@ export default function EnterTime(props) {
         if(res.status == "existed") {
           setExist(true)    
         } 
-
-
-
-
-    setExist(false);
-    setInvalidDate(false);
-
-    const response = await fetch("http://localhost:8082/submitTime", {
-      method: "PATCH",
-      body: JSON.stringify({
-        employeeId: user.employeeId,
-        date: dateWork,
-        hoursWorked: timeworked,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        if (res.status == "existed") {
-          setExist(true);
-        }
+      // )
+      
       });
-  };
+    }
+       
+
+
+
 
   return (
     <div className=" homebg">
