@@ -71,7 +71,7 @@ function Header(props) {
       
         <div className="Logo"> 
           <div className="LogoName"> Duck Creek Technologies</div>
-          <div><img src={logo} alt="logo"/></div>
+          <div><img src={logo} alt="Duck Creek logo - polygon drawing of a duck"/></div>
         </div>
         <div className="Avatar">  
           <div className="Name">{isLoggedIn? user.firstName +" "+ user.lastName : "Not Logged In"}</div>

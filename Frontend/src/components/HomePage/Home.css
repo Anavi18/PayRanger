@@ -9,7 +9,10 @@
 .card:hover {
 
     /* background-color:#334451 */
-    background-color:#3e5f79
+    /*background-color:#517b9b;*/
+    background-color:#3e5f79;
+    filter:contrast(.5);
+    filter:brightness(1.5)
 }
 .card-img-top{
     padding-top: 1.3rem;
@@ -19,6 +22,8 @@
     width: 82%;
     margin-left: 3%;
     margin-top: 15%;
+    filter:contrast(1.5);
+    filter:brightness(.8)
 
 }
 
