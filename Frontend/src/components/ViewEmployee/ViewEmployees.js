@@ -139,9 +139,6 @@ export default function ViewEmployee(props) {
           method: 'POST',
           body: JSON.stringify({ employeeId: user.employeeId, companyId: user.companyId}),
 
-          method: "POST",
-          body: JSON.stringify({ employeeId: user.employeeId }),
-
           headers: {
             "Content-Type": "application/json",
           },
