@@ -22,6 +22,9 @@ import {
   ModalBody,
 } from "reactstrap";
 
+
+
+
 function Emp_view({ hour, wage }) {
   return (
     <div>
@@ -37,6 +40,15 @@ function Emp_view({ hour, wage }) {
     </div>
   );
 }
+
+
+function getCompanyId(){ //checks cookies to see if manager 
+  let cookieValue = Cookies.get('userLoggedIn');
+  let userLoggedIn = JSON.parse(decodeURIComponent(cookieValue));
+  let id = userLoggedIn.companyId;
+  return id;
+}
+
 
 function EmpPayroll(props) {
   const [viewClicked, setViewClicked] = React.useState(false);
@@ -58,6 +70,7 @@ function EmpPayroll(props) {
       method: "POST",
       body: JSON.stringify({
         employeeId: emp.employeeId,
+        companyId: getCompanyId(),
         startDate: start,
         endDate: end,
       }),
