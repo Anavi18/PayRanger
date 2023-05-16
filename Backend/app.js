@@ -80,7 +80,7 @@ app.post("/getHoursWorked", async (req, res) => {
         }
         user = await employeeModel.findOne({companyId: comId, employeeId: empId})
         let sal
-        if ("salary" in user) {
+        if (user.salary != undefined) {
             sal = parseFloat(user.salary)
         }else {
             sal = 1.0
