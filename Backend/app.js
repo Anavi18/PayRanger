@@ -74,17 +74,19 @@ app.post("/getHoursWorked", async (req, res) => {
         endDate = new Date(Date.UTC(eyear,emonth-1,eday))
    
         data = await timeEntryModel.findOne({companyId: comId, employeeId: empId})
+        if (data == null) {
+            res.status(200).json({"numHours": 0, "earned": 0})
+            return
+        }
         user = await employeeModel.findOne({companyId: comId, employeeId: empId})
-        sal = parseFloat(user.salary)
-        let numHours = 0
-        let timeEntries = data.timeEntries
-
-        for (let x = 0; x < timeEntries.length; x++){
-            if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
-                numHours = numHours + timeEntries[x].hoursWorked
-            }
-        } 
+        let sal
+        if ("salary" in user) {
+            sal = parseFloat(user.salary)
+        }else {
+            sal = 1.0
+        }
         
+        let numHours = data.timeEntries.reduce((acc,cur) => cur.date >= startDate && cur.date <= endDate ? acc+cur.hoursWorked : acc, 0)
         earned = sal * numHours
         
         res.status(200).json({"numHours": numHours, "earned": earned})
