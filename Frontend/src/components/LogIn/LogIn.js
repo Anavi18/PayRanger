@@ -36,6 +36,10 @@ export default function LogIn(props) {
     const onForgotPasswordClick = (event) => {  
       showForgotPassword(true);
     };
+
+    const keyHandler = (event) => {
+      if (event.key == 'Enter') {handleLogin()}
+    }
   
     return (
       <div className="loginbg">
@@ -47,6 +51,7 @@ export default function LogIn(props) {
                     type="text"
                     placeholder="Username"
                     onChange={onUsernameChange}
+                    onKeyDown={keyHandler}
                   />
               </div>
 
@@ -55,6 +60,7 @@ export default function LogIn(props) {
                   type="password"
                   placeholder="Password"
                   onChange={onPasswordChange}
+                  onKeyDown={keyHandler}
                 />
               </div>
             
