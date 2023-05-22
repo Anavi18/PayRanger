@@ -70,6 +70,10 @@ export default function ViewPayroll(props) {
         
       }
 
+    const keyHandler = (event) => {
+    if (event.key == 'Enter') {handleViewPayroll()}
+    }
+
     
     
     return (
@@ -95,7 +99,7 @@ export default function ViewPayroll(props) {
                     />
                     
                     </Stack>
-                    <div className="btn mt-4 enter-btn " onClick={handleViewPayroll} >View</div>
+                    <div className="btn mt-4 enter-btn " onClick={handleViewPayroll} onKeyDown={keyHandler} tabIndex={0}>View</div>
                     <div className="mt-4">{isClicked && <Wage wage={wage} hour = {hour}/>}</div>
 
                     </LocalizationProvider>

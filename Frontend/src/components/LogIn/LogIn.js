@@ -38,8 +38,6 @@ export default function LogIn(props) {
     };
 
     const keyHandler = (event) => {
-      //console.log(event.key == 'Enter')
-      //return event.key == 'Enter'
       if (event.key == 'Enter') {handleLogin()}
     }
   

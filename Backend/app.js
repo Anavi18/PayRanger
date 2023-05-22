@@ -13,10 +13,10 @@ const timeEntryModel = require("./models/time-entries")
 
 app.post("/getEmployees", async (req, res) => {
     try{
-        employee = await employeeModel.findOne({employeeId: req.body.employeeId });
+        employee = await employeeModel.findOne({companyId: req.body.companyId, employeeId: req.body.employeeId})
         let array = []
         if(employee.isManager){
-            data = await employeeModel.find({managerId: employee.employeeId});
+            data = await employeeModel.find({companyId: req.body.companyId, managerId: employee.employeeId})
             data.forEach((x)=>array.push({ 
                 "firstName": x.firstName, 
                 "lastName": x.lastName, 
@@ -35,7 +35,7 @@ app.post("/login", async (req, res) => {
         username = req.body.email
         pwd = req.body.password
 
-        user = await employeeModel.findOne({ email: username});
+        user = await employeeModel.findOne({email: username})
         if (user != null && user.password == pwd){
             res.status(200).json({ 
             "employeeId": user.employeeId, 
@@ -55,7 +55,8 @@ app.post("/login", async (req, res) => {
 
 app.post("/getHoursWorked", async (req, res) => {
     try{
-        id = req.body.employeeId
+        empId = req.body.employeeId
+        comId = req.body.companyId
         start = req.body.startDate
         end = req.body.endDate
         syear = parseInt(start.slice(0, 4))
@@ -64,30 +65,31 @@ app.post("/getHoursWorked", async (req, res) => {
         eyear = parseInt(end.slice(0, 4))
         emonth = parseInt(end.slice(5,7))
         eday = parseInt(end.slice(8, 10))
+        if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
+            res.status(401).json({})
+            return
+        }
 	    
         startDate = new Date(Date.UTC(syear,smonth-1,sday))
         endDate = new Date(Date.UTC(eyear,emonth-1,eday))
    
-        data = await timeEntryModel.findOne({ employeeId: id});
-        user = await employeeModel.findOne({employeeId: id});
-        sal = parseFloat(user.salary)
-        let numHours = 0;
-        let timeEntries = data.timeEntries
-
-        for (let x = 0; x < timeEntries.length; x++){
-            if((timeEntries[x].date >= startDate) && (timeEntries[x].date <= endDate)){
-                numHours = numHours + timeEntries[x].hoursWorked;
-            }
-        } 
+        data = await timeEntryModel.findOne({companyId: comId, employeeId: empId})
+        if (data == null) {
+            res.status(200).json({"numHours": 0, "earned": 0})
+            return
+        }
+        user = await employeeModel.findOne({companyId: comId, employeeId: empId})
+        let sal
+        if (user.salary != undefined) {
+            sal = parseFloat(user.salary)
+        }else {
+            sal = 1.0
+        }
         
+        let numHours = data.timeEntries.reduce((acc,cur) => cur.date >= startDate && cur.date <= endDate ? acc+cur.hoursWorked : acc, 0)
         earned = sal * numHours
-
-        if((syear > eyear) || (syear == eyear && smonth > emonth) || (syear == eyear && smonth == emonth && sday > eday)){
-            res.status(401).json({})
-        }
-        else{
-            res.status(200).json({"numHours": numHours, "earned": earned})
-        }
+        
+        res.status(200).json({"numHours": numHours, "earned": earned})
     }catch(error){
         res.status(400).json(error)
     }
@@ -95,8 +97,8 @@ app.post("/getHoursWorked", async (req, res) => {
 
 app.patch("/submitTime", async (req, res) => {
 	try{
-        
-        id = req.body.employeeId
+        empId = req.body.employeeId
+        comId = req.body.companyId
         date = req.body.date
         hoursWorked = req.body.hoursWorked
  
@@ -105,8 +107,13 @@ app.patch("/submitTime", async (req, res) => {
         day = parseInt(date.slice(8, 10))
 
         newDate = new Date(Date.UTC(year, month - 1, day))
+        let ESToffset = 1000*60*60*5
+        if (Date.now() < newDate.getTime()+ESToffset) {
+            res.status(441).json({"status": "invalid"})
+            return
+        }
     
-		data = await timeEntryModel.findOne({ employeeId: id})
+		data = await timeEntryModel.findOne({companyId: comId, employeeId: empId})
 
         // create new doc in database if one doesn't exist
         if (data == null) {
@@ -120,20 +127,7 @@ app.patch("/submitTime", async (req, res) => {
         }
 
         let timeEntries = data.timeEntries 
-   
-        let entryExists = false;
-        for (let x = 0; x < timeEntries.length; x++){
-            if(timeEntries[x].date.getTime() == newDate.getTime()){
-                entryExists = true;
-                break;
-            }
-        }
-
-        let ESToffset = 1000*60*60*5
-        if (Date.now() < newDate.getTime()+ESToffset) {
-            res.status(441).json({"status": "invalid"})
-            return
-        }
+        let entryExists = timeEntries.some(x => x.date.getTime() == newDate.getTime())
         
         if (entryExists) {
             res.status(440).json({"status": "existed"})
@@ -143,13 +137,12 @@ app.patch("/submitTime", async (req, res) => {
         let toAdd = {"date": newDate, "hoursWorked": hoursWorked}
         timeEntries.push(toAdd)
 		await data.save()
-        
 		res.status(200).send({"status": "ok"})
 	}catch(error){
 		res.status(400).send(error)
 	}
 })
 
-const port = process.env.PORT || 8082;
+const port = process.env.PORT || 8082
 
 app.listen(port, () => console.log(`Server running on port ${port}`))

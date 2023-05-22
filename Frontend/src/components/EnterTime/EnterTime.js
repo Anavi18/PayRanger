@@ -97,7 +97,9 @@ export default function EnterTime(props) {
       });
     }
        
-
+  const keyHandler = (event) => {
+    if (event.key == 'Enter') {handleTimeSubmit()}
+  }
 
 
 
@@ -130,7 +132,7 @@ export default function EnterTime(props) {
                   onChange={(newTime) => setTo(newTime)}
                 />
               </Stack>
-              <div className="btn mt-3 enter-btn" onClick={handleTimeSubmit}>
+              <div className="btn mt-3 enter-btn" onClick={handleTimeSubmit} onKeyDown={keyHandler} tabIndex={0}>
                 Save
               </div>
               <div className="mt-4  msg">
