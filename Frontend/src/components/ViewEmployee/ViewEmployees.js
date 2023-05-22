@@ -87,6 +87,10 @@ function EmpPayroll(props) {
       });
   };
 
+  const keyHandlerVP = (event) => {
+  if (event.key == 'Enter') {handleViewPayroll()}
+  }
+
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -106,6 +110,8 @@ function EmpPayroll(props) {
 
         <div
           className="btn mt-4 view_emp_payroll_btn"
+          tabIndex={0}
+          onKeyDown={keyHandlerVP}
           onClick={handleViewPayroll}
         >
           View
@@ -213,6 +219,17 @@ export default function ViewEmployee(props) {
     </button>
   );
 
+  let currEmp = {}  //global-ish variables are a terrible idea, but I couldn't find a better work-around to this.
+  const keyHandlerLGI = (event) => {
+    if(event.key == 'Enter') {
+      handleSelectEmp(
+        currEmp.employeeId,
+        currEmp.firstName,
+        currEmp.lastName
+      )
+    }
+  }
+
   return (
     <div className="homebg">
       <div className="container  ">
@@ -250,6 +267,9 @@ export default function ViewEmployee(props) {
                     <li
                       className="list-group-item em btn"
                       key={emp.employeeId}
+                      tabIndex={0}
+                      onFocus={() => {currEmp = emp}}
+                      onKeyDown={keyHandlerLGI}
                       onClick={() =>
                         handleSelectEmp(
                           emp.employeeId,
